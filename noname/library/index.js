@@ -113,14 +113,17 @@ export class Library {
 	ondb2 = [];
 	chatHistory = [];
 	emotionList = {
+		huangdou_emotion: 50,
 		xiaowu_emotion: 14,
 		xiaokuo_emotion: 8,
 		shibing_emotion: 15,
+		wanglang_emotion: 20,
 		guojia_emotion: 20,
 		zhenji_emotion: 20,
 		xiaosha_emotion: 20,
 		xiaotao_emotion: 20,
 		xiaojiu_emotion: 20,
+		mobile_emotion: 15,
 	};
 	animate = {
 		skill: {},
@@ -987,7 +990,7 @@ export class Library {
 				},
 				sync_speed: {
 					name: "限制结算速度",
-					intro: "在动画结算完成前不执行下一步操作，开启后游戏操作的间隔更长但画面更浏畅，在游戏较卡时建议开启",
+					intro: "在动画结算完成前不执行下一步操作，开启后游戏操作的间隔更长但画面更流畅，在游戏较卡时建议开启",
 					init: true,
 				},
 				enable_vibrate: {
@@ -4117,7 +4120,9 @@ export class Library {
 					intro: "自由选将对话框中最近使用武将的数量",
 					init: "12",
 					item: {
+						5: "5",
 						6: "6",
+						10: "10",
 						12: "12",
 						20: "20",
 						30: "30",
@@ -4484,6 +4489,19 @@ export class Library {
 						'<button style="width:40px">确定</button></div>',
 					clear: true,
 				},
+				
+				// 临时修改（by 棘手怀念摧毁）
+				effectBGM_mb_caomao: {
+					name: "• 手杀曹髦专属BGM",
+					init: true,
+					intro: "开启后，游戏中满足条件时会切换专属BGM",
+				},
+				effectBGM_pot_weiyan: {
+					name: "• 势魏延专属BGM",
+					init: true,
+					intro: "开启后，游戏中满足条件时会切换专属BGM",
+				},
+				
 				background_audio: {
 					name: "游戏音效",
 					init: true,
@@ -6049,6 +6067,7 @@ export class Library {
 						disabled: "不启用",
 						online: "Online",
 						rewrite: "Rewrite",
+						shousha: "逐鹿天下",
 						chaoming: "潮鸣",
 						random: "随机播放",
 					},
@@ -6305,10 +6324,10 @@ export class Library {
 					name: "四号位获得【飞扬】",
 					init: true,
 					frequent: true,
-					intro: "最后行动的角色获得技能【飞扬】（准备阶段，你可以弃置三张牌，然后弃置判定区的一张牌）",
+					intro: "最后行动的角色获得技能【飞扬】（限定技，准备阶段，你可以弃置两张牌，然后弃置判定区的一张牌）",
 				},
 				connect_choice_num: {
-					name: "侯选武将数",
+					name: "候选武将数",
 					init: "20",
 					frequent: true,
 					item: {
@@ -6599,7 +6618,7 @@ export class Library {
 					name: "四号位获得【飞扬】",
 					init: true,
 					frequent: true,
-					intro: "最后行动的角色获得技能【飞扬】（准备阶段，你可以弃置三张牌，然后弃置判定区的一张牌）",
+					intro: "最后行动的角色获得技能【飞扬】（限定技，准备阶段，你可以弃置两张牌，然后弃置判定区的一张牌）",
 				},
 				replace_character_two: {
 					name: "替补模式",
@@ -7379,6 +7398,22 @@ export class Library {
 						unlimited: "无限",
 					},
 				},
+				free_choose: {
+					name: "自由选将",
+					init: true,
+					onclick(bool) {
+						game.saveConfig("free_choose", bool, this._link.config.mode);
+						if (get.mode() != this._link.config.mode || (!_status.event.getParent().showConfig && !_status.event.showConfig)) {
+							return;
+						}
+						if (!ui.cheat2 && get.config("free_choose")) {
+							ui.create.cheat2();
+						} else if (ui.cheat2 && !get.config("free_choose")) {
+							ui.cheat2.close();
+							delete ui.cheat2;
+						}
+					},
+				},
 				update: function (config, map) {
 					if (config.single_mode != "normal") {
 						map.enable_jin.hide();
@@ -7389,6 +7424,11 @@ export class Library {
 						map.change_card.hide();
 					} else {
 						map.change_card.show();
+					}
+					if (config.single_mode == "wuxianhuoli" || config.single_mode == "dianjiang") {
+						map.free_choose.show();
+					} else {
+						map.free_choose.hide();
 					}
 				},
 			},
@@ -9947,6 +9987,7 @@ export class Library {
 		western: "西",
 		key: "键",
 		jin: "晋",
+		ye: "野",
 		double: "双",
 		wei2: "魏国",
 		shu2: "蜀国",
@@ -9956,6 +9997,7 @@ export class Library {
 		western2: "西方",
 		key2: "KEY",
 		jin2: "晋朝",
+		ye2: "野心家",
 		double2: "双势力",
 		male: "男",
 		female: "女",
@@ -10013,6 +10055,7 @@ export class Library {
 		_disableJudge: "判定区",
 
 		xiaowu_emotion: "小无表情",
+		wanglang_emotion: "王朗表情",
 		guojia_emotion: "郭嘉表情",
 		zhenji_emotion: "甄姬表情",
 		shibing_emotion: "士兵表情",
@@ -10020,6 +10063,8 @@ export class Library {
 		xiaotao_emotion: "小桃表情",
 		xiaojiu_emotion: "小酒表情",
 		xiaokuo_emotion: "小扩表情",
+		huangdou_emotion: "黄豆表情",
+		mobile_emotion: "手杀表情",
 
 		pause: "暂停",
 		config: "选项",
@@ -11147,6 +11192,86 @@ export class Library {
 	 * }}
 	 */
 	skill = {
+		equipEnable: {
+			chalotte: true,
+			mod: {
+				globalFrom(from, to, distance) {
+					let num = from
+						// 临时修改（by 棘手怀念摧毁）
+						.getCards("j", vcard => {
+						// .getVCards("j", vcard => {
+							if (get.type(vcard) != "delay") {
+								false;
+							} else if (!vcard.storage?.equipEnable) {
+								return false;
+							}
+							return vcard.cards.some(card => get.type(card) == "equip");
+						})
+						.map(vcard => {
+							const sum = vcard.cards?.reduce((sum, card) => {
+								if (get.type(card) != "equip") {
+									return sum;
+								}
+								let globalFrom = get.info(card)?.distance?.globalFrom || 0;
+								return sum + globalFrom;
+							}, 0);
+							return sum || 0;
+						})
+						.reduce((a, b) => a + b, 0);
+					return distance + num;
+				},
+				globalTo(from, to, distance) {
+					let num = to
+						// 临时修改（by 棘手怀念摧毁）
+						.getCards("j", vcard => {
+						// .getVCards("j", vcard => {
+							if (get.type(vcard) != "delay") {
+								false;
+							} else if (!vcard.storage?.equipEnable) {
+								return false;
+							}
+							return vcard.cards.some(card => get.type(card) == "equip");
+						})
+						.map(vcard => {
+							const sum = vcard.cards?.reduce((sum, card) => {
+								if (get.type(card) != "equip") {
+									return sum;
+								}
+								let globalTo = get.info(card)?.distance?.globalTo || 0;
+								return sum + globalTo;
+							}, 0);
+							return sum || 0;
+						})
+						.reduce((a, b) => a + b, 0);
+					return distance + num;
+				},
+				attackRangeBase(player) {
+					let num = player
+						// 临时修改（by 棘手怀念摧毁）
+						.getCards("j", vcard => {
+						// .getVCards("j", vcard => {
+							if (get.type(vcard) != "delay") {
+								false;
+							} else if (!vcard.storage?.equipEnable) {
+								return false;
+							}
+							return vcard.cards.some(card => get.type(card) == "equip");
+						})
+						.map(vcard => {
+							const num = vcard.cards?.reduce((sum, card) => {
+								if (get.type(card) != "equip") {
+									return sum;
+								}
+								let attackFrom = get.info(card)?.distance?.attackFrom || 0;
+								return sum + attackFrom;
+							}, 0);
+							return num || 0;
+						})
+						.reduce((a, b) => a + b, 0);
+					return Math.max(player.getEquipRange(player.getCards("e")), 1 - num);
+				},
+			},
+		},
 		stratagem_fury: {
 			marktext: "🔥",
 			intro: {
@@ -11411,7 +11536,13 @@ export class Library {
 		charge: {
 			markimage: "image/card/charge.png",
 			intro: {
-				content: "当前蓄力点数：#",
+				content(storage, player) {
+					let max = player.getMaxCharge();
+					if (max == Infinity) {
+						max = "∞";
+					}
+					return `当前蓄力点数：${storage}/${max}`;
+				},
 			},
 		},
 		cooperation: {
@@ -11452,6 +11583,7 @@ export class Library {
 					forced: true,
 					charlotte: true,
 					popup: false,
+					nopop: true,
 					firstDo: true,
 					filter: function (event, player) {
 						if (!event.source) return false;
@@ -11513,6 +11645,7 @@ export class Library {
 					forced: true,
 					charlotte: true,
 					popup: false,
+					nopop: true,
 					firstDo: true,
 					filter: function (event, player) {
 						if (event.getParent().name != "draw") return false;
@@ -11574,6 +11707,7 @@ export class Library {
 					forced: true,
 					charlotte: true,
 					popup: false,
+					nopop: true,
 					firstDo: true,
 					filter: function (event, player) {
 						if (event.type != "discard") return false;
@@ -11645,6 +11779,7 @@ export class Library {
 					forced: true,
 					charlotte: true,
 					popup: false,
+					nopop: true,
 					firstDo: true,
 					filter: function (event, player) {
 						var suit = get.suit(event.card);
@@ -11749,6 +11884,7 @@ export class Library {
 					charlotte: true,
 					forced: true,
 					popup: false,
+					nopop: true,
 					onremove: true,
 					filter: function (event, player) {
 						return player.isPhaseUsing() && player.storage.zhengsu_leijin !== false;
@@ -11813,6 +11949,7 @@ export class Library {
 					charlotte: true,
 					forced: true,
 					popup: false,
+					nopop: true,
 					onremove: true,
 					filter: function (event, player) {
 						return player.isPhaseUsing() && player.storage.zhengsu_bianzhen !== false;
@@ -11916,6 +12053,7 @@ export class Library {
 					charlotte: true,
 					forced: true,
 					popup: false,
+					nopop: true,
 					onremove: true,
 					filter: function (event, player) {
 						if (player.storage.zhengsu_mingzhi === false || event.type != "discard") return false;
@@ -12168,7 +12306,6 @@ export class Library {
 			firstDo: true,
 			trigger: {
 				player: [
-					"playercontrol",
 					"chooseToUseBegin",
 					"chooseToRespondBegin",
 					"chooseToDiscardBegin",
@@ -12185,6 +12322,11 @@ export class Library {
 					"chooseToMoveBegin",
 					"chooseToPlayBeatmapBegin",
 					"chooseToGiveBegin",
+					"chooseToGuanxingBegin",
+					"chooseButtonTargetBegin",
+					"chooseNumbersBegin",
+					
+					"playercontrol",
 				],
 			},
 			forced: true,
@@ -12751,6 +12893,7 @@ export class Library {
 			logv: false,
 			forceDie: true,
 			silent: true,
+			forceOut: true,
 			//priority:-5,
 			content: function () {
 				"step 0";
@@ -14163,10 +14306,31 @@ export class Library {
 			},
 		],
 		[
+			"兴",
+			{
+				color: "#c3f9ff",
+				nature: "thundermm",
+			},
+		],
+		[
 			"梦",
 			{
 				color: "#6affe2",
 				nature: "watermm",
+			},
+		],
+		[
+			"疑",
+			{
+				color: "#5a6968",
+				nature: "graymm",
+			},
+		],
+		[
+			"慢",
+			{
+				color: "#5a6968",
+				nature: "graymm",
 			},
 		],
 		[
@@ -14210,28 +14374,28 @@ export class Library {
 			"旧",
 			{
 				color: "#a4a4a4",
-				nature: "black",
+				nature: "blackmm",
 			},
 		],
 		[
 			"旧界",
 			{
 				color: "#a4a4a4",
-				nature: "black",
+				nature: "blackmm",
 			},
 		],
 		[
 			"节钺",
 			{
 				color: "#a4a4a4",
-				nature: "black",
+				nature: "blackmm",
 			},
 		],
 		[
 			"毅重",
 			{
 				color: "#a4a4a4",
-				nature: "black",
+				nature: "blackmm",
 			},
 		],
 		[
@@ -14292,6 +14456,39 @@ export class Library {
 			},
 		],
 		[
+			"蛇",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "🐍";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"骏骊",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "🐎";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"赛马",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "🏇";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
 			"SP",
 			{
 				getSpan: () => {
@@ -14341,7 +14538,9 @@ export class Library {
 						span = document.createElement("span");
 					if (lib.characterPack.shiji && name in lib.characterPack.shiji) {
 						for (const entry of Object.entries(lib.characterSort.shiji)) {
-							if (!entry[1].includes(name)) continue;
+							if (!entry[1].includes(name)) {
+								continue;
+							}
 							prefix = get.translation(entry[0]).slice(-1);
 							break;
 						}
@@ -14350,13 +14549,57 @@ export class Library {
 							span.dataset.nature = "watermm";
 						}
 						span.innerHTML = prefix;
-					} else if (simple) span.textContent = "手杀";
-					else {
+					} else if (simple) {
+						span.textContent = "手杀";
+					} else {
 						span.style.fontFamily = "NonameSuits";
 						span.textContent = "📱";
 					}
 					return span.outerHTML;
 				},
+			},
+		],
+		[
+			"礼",
+			{
+				color: "#f0cf13",
+				nature: "shenmm",
+			},
+		],
+		[
+			"射",
+			{
+				color: "#f0cf13",
+				nature: "shenmm",
+			},
+		],
+		[
+			"书",
+			{
+				color: "#f0cf13",
+				nature: "shenmm",
+			},
+		],
+		[
+			"数",
+			{
+				color: "#f0cf13",
+				nature: "shenmm",
+			},
+		],
+		[
+			"御",
+			{
+				color: "#f0cf13",
+				nature: "shenmm",
+			},
+		],
+		[
+			"手杀乐",
+			{
+				showName: "乐",
+				color: "#f0cf13",
+				nature: "shenmm",
 			},
 		],
 		[
@@ -14371,6 +14614,57 @@ export class Library {
 					span.textContent = "TW";
 					return span.outerHTML;
 				},
+			},
+		],
+		[
+			"汉末",
+			{
+				showName: "汉",
+				color: "#fefedc",
+				nature: "shenmm",
+			},
+		],
+		[
+			"汉末神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("汉末")}${get.prefixSpan("神")}`,
+			},
+		],
+		[
+			"长安",
+			{
+				showName: "镐",
+				color: "#40e0d0",
+				nature: "shenmm",
+			},
+		],
+		[
+			"长安神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("长安")}${get.prefixSpan("神")}`,
+			},
+		],
+		[
+			"渭南",
+			{
+				showName: "渭",
+				color: "#2a17d5",
+				nature: "shenmm",
+			},
+		],
+		[
+			"渭南神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("渭南")}${get.prefixSpan("神")}`,
 			},
 		],
 		[
@@ -14587,6 +14881,13 @@ export class Library {
 			},
 		],
 		[
+			"韩氏",
+			{
+				color: "#ffff99",
+				nature: "firemm",
+			},
+		],
+		[
 			"幻",
 			{
 				color: "#ffff99",
@@ -14604,7 +14905,7 @@ export class Library {
 			"牢",
 			{
 				color: "#EEEE00",
-				nature: "black",
+				nature: "blackmm",
 			},
 		],
 		[
@@ -14617,19 +14918,310 @@ export class Library {
 			},
 		],
 		[
-			"鼎",
+			"友",
 			{
-				color: "#ffccff",
-				nature: "black",
+				color: "#AAABFF",
+				nature: "blackmm",
+			},
+		],
+		[
+			"手杀合",
+			{
+				showName: "合",
+				color: "#AAABFF",
+				nature: "blackmm",
 			},
 		],
 		[
 			"九鼎",
 			{
+				showName: "鼎",
+				color: "#ffccff",
+				nature: "blackmm",
+			},
+		],
+		[
+			"SCL",
+			{
+				showName: "競",
+				color: "#fefedc",
+				nature: "soilmm",
+			},
+		],
+		[
+			"汉",
+			{
+				color: "#ffd700",
+				nature: "metalmm",
+			},
+		],
+		[
+			"OL乐",
+			{
+				showName: "乐",
+				color: "#dab71b",
+				nature: "firemm",
+			},
+		],
+		[
+			"烈",
+			{
+				color: "#8B0000",
+				nature: "firemm",
+			},
+		],
+		[
+			"燕幽",
+			{
+				showName: "幽",
+				color: "#ff6a6a",
+				nature: "redmm",
+			},
+		],
+		[
+			"威",
+			{
+				color: "#ff9966",
+				nature: "glodenmm",
+			},
+		],
+		[
+			"势",
+			{
+				color: "#7d26cd",
+				nature: "purplemm",
+			},
+		],
+		[
+			"TW谋",
+			{
 				/**
 				 * @returns {string}
 				 */
-				getSpan: () => `${get.prefixSpan("鼎")}`,
+				getSpan: () => `${get.prefixSpan("TW")}${get.prefixSpan("谋")}`,
+			},
+		],
+		[
+			"闪",
+			{
+				color: "#00bfff",
+				nature: "watermm",
+			},
+		],
+		[
+			"ddd",
+			{
+				showName: "3D",
+				color: "#edb5b5",
+				nature: "watermm",
+			},
+		],
+		[
+			"荆扬",
+			{
+				showName: "扬",
+				color: "#ffcc99",
+				nature: "thundermm",
+			},
+		],
+		[
+			"魔",
+			{
+				color: "#2e002e",
+				nature: "firemm",
+			},
+		],
+		[
+			"青史",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "📚";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"风云",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "☁️";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"爻",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.textContent = "☯";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"忍",
+			{
+				color: "#180a29",
+				nature: "thundermm",
+			},
+		],
+		[
+			"狂",
+			{
+				color: "#8B00FF",
+				nature: "firemm",
+			},
+		],
+		[
+			"绶",
+			{
+				color: "#8B00FF",
+				nature: "shenmm",
+			},
+		],
+		[
+			"欧陆",
+			{
+				getSpan: () => {
+					const span = document.createElement("span"),
+						style = span.style;
+					style.writingMode = style.webkitWritingMode = "horizontal-tb";
+					style.fontFamily = "MotoyaLMaru";
+					style.transform = "scaleY(0.85)";
+					span.textContent = "EU";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"PE",
+			{
+				getSpan: () => {
+					const span = document.createElement("span"),
+						style = span.style;
+					style.writingMode = style.webkitWritingMode = "horizontal-tb";
+					style.fontFamily = "MotoyaLMaru";
+					style.transform = "scaleY(0.85)";
+					span.textContent = "PE";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"智将",
+			{
+				showName: "智",
+				color: "#99e2ff",
+				nature: "firemm",
+			},
+		],
+		[
+			"闪耀",
+			{
+				showName: "闪",
+				color: "#c282b2",
+				nature: "keymm",
+			},
+		],
+		[
+			"闪耀战姬",
+			{
+				getSpan: () => {
+					const span = document.createElement("span");
+					span.style.fontFamily = "NonameSuits";
+					span.style.color = "#c282b2";
+					span.dataset.nature = "keymm";
+					span.textContent = "★";
+					return span.outerHTML;
+				},
+			},
+		],
+		[
+			"领主",
+			{
+				color: "#2e002e",
+				nature: "firemm",
+			},
+		],
+		[
+			"徐兖",
+			{
+				showName: "徐",
+				color: "#ff0000",
+				nature: "firemm",
+			},
+		],
+		[
+			"有",
+			{
+				color: "#dd9420",
+				nature: "firemm",
+			},
+		],
+		[
+			"文心雕龙",
+			{
+				showName: "文",
+				color: "#ffffff",
+				nature: "firemm",
+			},
+		],
+		[
+			"26",
+			{
+				getSpan: () => {
+					const span = document.createElement("span"),
+						style = span.style;
+					style.writingMode = style.webkitWritingMode = "horizontal-tb";
+					style.fontFamily = "MotoyaLMaru";
+					style.transform = "scaleY(0.85)";
+					span.textContent = "26";
+					return span.outerHTML;
+				},
+			},
+		],
+		
+		// 补充by棘手怀念摧毁
+		[
+			"26神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("26")}${get.prefixSpan("神")}`,
+			},
+		],
+		[
+			"OL魔",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("OL")}${get.prefixSpan("魔")}`,
+			},
+		],
+		[
+			"极略神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("神")}`,
+			},
+		],
+		[
+			"应天神",
+			{
+				/**
+				 * @returns {string}
+				 */
+				getSpan: () => `${get.prefixSpan("神")}`,
 			},
 		],
 		[
@@ -14643,6 +15235,20 @@ export class Library {
 			"太阴",
 			{
 				color: "#f3652d",
+				nature: "metalmm",
+			},
+		],
+		[
+			"少阳",
+			{
+				color: "#ffd700",
+				nature: "metalmm",
+			},
+		],
+		[
+			"太阳",
+			{
+				color: "#fefedc",
 				nature: "metalmm",
 			},
 		],

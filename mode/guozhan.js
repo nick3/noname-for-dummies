@@ -648,6 +648,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					"gz_liuba",
 					"gz_zhuling",
 				],
+				guozhan_jun: ["gz_jun_caocao", "gz_jun_sunquan", "gz_jun_liubei", "gz_jun_zhangjiao"],
+				guozhan_yexinjia: ["gz_zhonghui", "gz_simazhao", "gz_gongsunyuan", "gz_sunchen"],
 				guozhan_double: [
 					"gz_tangzi",
 					"gz_liuqi",
@@ -662,8 +664,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					"gz_wenqin",
 					"gz_pengyang",
 				],
-				guozhan_jun: ["gz_jun_caocao", "gz_jun_sunquan", "gz_jun_liubei", "gz_jun_zhangjiao"],
-				guozhan_yexinjia: ["gz_zhonghui", "gz_simazhao", "gz_gongsunyuan", "gz_sunchen"],
+				// guozhan_online: ["gz_re_xusheng"],
 				guozhan_jin: [
 					"gz_jin_simayi",
 					"gz_jin_simazhao",
@@ -708,14 +709,6 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					"gz_jin_yanghu",
 				],
 				guozhan_mobile: ["gz_lingcao", "gz_lifeng", "gz_sp_duyu"],
-				guozhan_qunxiong: [
-					"gz_xf_huangquan",
-					"gz_guohuai",
-					"gz_guanqiujian",
-					"gz_zhujun",
-					"gz_chengong",
-					"gz_re_xugong",
-				],
 				guozhan_tw: [
 					"gz_yangxiu",
 					"gz_tw_tianyu",
@@ -729,24 +722,32 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					"gz_old_huaxiong",
 				],
 				guozhan_others: ["gz_beimihu", "gz_key_ushio", "gz_re_nanhualaoxian"],
+				guozhan_qunxiong: [
+					"gz_xf_huangquan",
+					"gz_guohuai",
+					"gz_guanqiujian",
+					"gz_zhujun",
+					"gz_chengong",
+					"gz_re_xugong",
+				],
 			},
 		},
 		characterPack: {
 			mode_guozhan: {
-				gz_shibing1wei: ["male", "wei", 0, [], ["unseen"]],
-				gz_shibing2wei: ["female", "wei", 0, [], ["unseen"]],
-				gz_shibing1shu: ["male", "shu", 0, [], ["unseen"]],
-				gz_shibing2shu: ["female", "shu", 0, [], ["unseen"]],
-				gz_shibing1wu: ["male", "wu", 0, [], ["unseen"]],
-				gz_shibing2wu: ["female", "wu", 0, [], ["unseen"]],
-				gz_shibing1qun: ["male", "qun", 0, [], ["unseen"]],
-				gz_shibing2qun: ["female", "qun", 0, [], ["unseen"]],
-				gz_shibing1jin: ["male", "jin", 0, [], ["unseen"]],
-				gz_shibing2jin: ["female", "jin", 0, [], ["unseen"]],
-				gz_shibing1ye: ["male", "ye", 0, [], ["unseen"]],
-				gz_shibing2ye: ["female", "ye", 0, [], ["unseen"]],
-				gz_shibing1key: ["male", "key", 0, [], ["unseen"]],
-				gz_shibing2key: ["female", "key", 0, [], ["unseen"]],
+				gz_shibing1wei: ["male", "wei", , [], ["unseen"]],
+				gz_shibing2wei: ["female", "wei", , [], ["unseen"]],
+				gz_shibing1shu: ["male", "shu", , [], ["unseen"]],
+				gz_shibing2shu: ["female", "shu", , [], ["unseen"]],
+				gz_shibing1wu: ["male", "wu", , [], ["unseen"]],
+				gz_shibing2wu: ["female", "wu", , [], ["unseen"]],
+				gz_shibing1qun: ["male", "qun", , [], ["unseen"]],
+				gz_shibing2qun: ["female", "qun", , [], ["unseen"]],
+				gz_shibing1jin: ["male", "jin", , [], ["unseen"]],
+				gz_shibing2jin: ["female", "jin", , [], ["unseen"]],
+				gz_shibing1ye: ["male", "ye", , [], ["unseen"]],
+				gz_shibing2ye: ["female", "ye", , [], ["unseen"]],
+				gz_shibing1key: ["male", "key", , [], ["unseen"]],
+				gz_shibing2key: ["female", "key", , [], ["unseen"]],
 
 				gz_zhonghui: ["male", "ye", 4, ["fakequanji", "fakepaiyi"], ["gzskin"]],
 				gz_simazhao: ["male", "ye", 3, ["gzzhaoxin", "gzsuzhi"], ["gzskin"]],
@@ -852,18 +853,18 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 
 				gz_dengai: ["male", "wei", 4, ["tuntian", "ziliang", "gzjixi"], ["gzskin"]],
 				gz_caohong: ["male", "wei", 4, ["fakehuyuan", "heyi"], ["gzskin"]],
-				gz_jiangfei: ["male", "shu", 3, ["shengxi", "gzshoucheng"]],
+				gz_jiangfei: ["male", "shu", 3, ["shengxi", "gzshoucheng"], ["gzskin"]],
 				gz_jiangwei: ["male", "shu", 4, ["tiaoxin", "yizhi", "tianfu"], ["gzskin"]],
 				gz_xusheng: ["male", "wu", 4, ["fakeyicheng"], ["gzskin"]],
 				gz_jiangqing: ["male", "wu", 4, ["gzshangyi", "niaoxiang"]],
 				gz_hetaihou: ["female", "qun", 3, ["zhendu", "qiluan"], ["gzskin"]],
 
 				gz_re_lidian: ["male", "wei", 3, ["xunxun", "wangxi"]],
-				gz_zangba: ["male", "wei", 4, ["rehengjiang"]],
+				gz_zangba: ["male", "wei", 4, ["rehengjiang"], ["img:image/character/tw_zangba.jpg"]],
 				gz_madai: ["male", "shu", 4, ["mashu2", "qianxi"], ["gzskin"]],
 				gz_mifuren: ["female", "shu", 3, ["gzguixiu", "gzcunsi"]],
 				gz_sunce: ["male", "wu", 4, ["jiang", "yingyang", "baka_hunshang"], ["gzskin"]],
-				gz_chendong: ["male", "wu", 4, ["duanxie", "fakefenming"]],
+				gz_chendong: ["male", "wu", 4, ["duanxie", "fakefenming"], ["gzskin"]],
 				gz_sp_dongzhuo: ["male", "qun", 4, ["hengzheng", "fakebaoling"]],
 				gz_zhangren: ["male", "qun", 4, ["chuanxin", "fengshi"]],
 
@@ -871,12 +872,12 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				gz_jun_zhangjiao: ["male", "qun", 4, ["wuxin", "hongfa", "wendao"]],
 				gz_jun_sunquan: ["male", "wu", 4, ["jiahe", "lianzi", "jubao"]],
 
-				gz_liqueguosi: ["male", "qun", 4, ["gzxiongsuan"]],
+				gz_liqueguosi: ["male", "qun", 4, ["gzxiongsuan"], ["gzskin"]],
 				gz_zuoci: ["male", "qun", 3, ["fakeyigui", "fakejihun"], ["gzskin"]],
 				gz_bianfuren: ["female", "wei", 3, ["wanwei", "gzyuejian"]],
 				gz_xunyou: ["male", "wei", 3, ["gzqice", "zhiyu"], ["gzskin"]],
 				gz_lingtong: ["male", "wu", 4, ["xuanlve", "yongjin"], ["gzskin"]],
-				gz_lvfan: ["male", "wu", 3, ["gzdiaodu", "gzdiancai"]],
+				gz_lvfan: ["male", "wu", 3, ["gzdiaodu", "gzdiancai"], ["gzskin"]],
 				gz_masu: ["male", "shu", 3, ["gzsanyao", "gzzhiman"], ["gzskin"]],
 				gz_shamoke: ["male", "shu", 4, ["gzjili"], ["gzskin"]],
 
@@ -897,8 +898,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				gz_lvlingqi: ["female", "qun", 4, ["guowu", "gzshenwei", "gzzhuangrong"], ["gzskin"]],
 				gz_dc_yanghu: ["male", "wei", 3, ["gzdeshao", "gzmingfa"]],
 
-				gz_cuimao: ["male", "wei", 3, ["gzzhengbi", "gzfengying"], []],
-				gz_yujin: ["male", "wei", 4, ["gzjieyue"], ["gzskin", "die_audio:yujin"]],
+				gz_cuimao: ["male", "wei", 3, ["gzzhengbi", "gzfengying"], ["gzskin"]],
+				gz_yujin: ["male", "wei", 4, ["gzjieyue"], ["img:image/character/yujin_yujin.jpg", "die_audio:yujin"]],
 				gz_wangping: ["male", "shu", 4, ["jianglue"], ["gzskin"]],
 				gz_fazheng: ["male", "shu", 3, ["gzxuanhuo", "gzenyuan"], ["gzskin", "die_audio:xin_fazheng"]],
 				gz_wuguotai: ["female", "wu", 3, ["gzbuyi", "ganlu"], ["gzskin"]],
@@ -960,6 +961,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				gz_gaoshun: ["male", "qun", 4, ["fakexunxi", "fakehuanjia"], ["gzskin"]],
 				gz_jin_jiachong: ["male", "jin", 3, ["fakexiongshu", "fakejianhui"]],
 				gz_jin_yanghu: ["male", "jin", 4, ["fakechongxin", "fakeweirong"]],
+
+				// gz_re_xusheng: ["male", "wu", 4, ["repojun"]],
 			},
 		},
 		skill: {
@@ -1704,7 +1707,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 								player.flashAvatar("fakeyigui", character);
 								player.unmarkAuto("fakeyigui", [character]);
 								_status.characterlist.add(character);
-								game.log(player, "移除了", "#g“魂”", "#y" + get.translation(character));
+								game.log(player, "移去了一张", "#g“魂（" + get.translation(character) + "）”");
 								if (!player.storage.fakeyigui2) {
 									player
 										.when({ global: "phaseBefore" })
@@ -2014,7 +2017,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 										);
 									}, 0);
 								})(player, target, all);
-								return Math.max(0, get.sgn(eff1 - eff2));
+								return Math.max(0, get.sgn(eff2 - eff1));
 							});
 						const cards = player.getExpansions("fakequanji");
 						if (index == 0) {
@@ -3757,7 +3760,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				subSkill: {
 					mark: {
 						charlotte: true,
-						trigger: { player: ["hideCharacterEnd", "showCharacterEnd"] },
+						trigger: { player: ["hideCharacterBegin", "showCharacterEnd"] },
 						filter(event, player) {
 							return get
 								.character(event[event.name == "hideCharacter" ? "toHide" : "toShow"], 3)
@@ -4227,25 +4230,28 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			fakechongxin: {
 				audio: "chongxin",
 				enable: "phaseUse",
+				viewAs: {
+					name: "yiyi",
+					isCard: true,
+				},
+				usable: 1,
 				filter(event, player) {
 					const card = new lib.element.VCard({ name: "yiyi" });
 					return (
 						lib.filter.targetEnabled2(card, player, player) &&
-						game.hasPlayer((target) => {
-							return (
-								lib.filter.targetEnabled2(card, player, target) && target.isEnemyOf(player)
-							);
-						})
+						game.hasPlayer(target => lib.skill.fakechongxin.filterTarget(card, player, target))
 					);
 				},
-				filterTarget(cardx, player, target) {
-					const card = new lib.element.VCard({ name: "yiyi" });
-					return lib.filter.targetEnabled2(card, player, target) && target.isEnemyOf(player);
+				selectTarget: 1,
+				filterTarget(card, player, target) {
+					if (game.checkMod(card, player, target, "unchanged", "playerEnabled", player) == false) return false;
+					if (game.checkMod(card, player, target, "unchanged", "targetEnabled", target) == false) return false;
+					return target.isEnemyOf(player);
 				},
-				usable: 1,
-				async content(event, trigger, player) {
-					const card = new lib.element.VCard({ name: "yiyi" });
-					await player.useCard(card, [player].concat(event.targets), false);
+				filterCard: () => false,
+				selectCard: -1,
+				precontent() {
+					event.result.targets.add(player);
 				},
 				ai: {
 					order(item, player) {
@@ -4323,7 +4329,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				subSkill: {
 					mark: {
 						charlotte: true,
-						trigger: { player: ["hideCharacterEnd", "showCharacterEnd"] },
+						trigger: { player: ["hideCharacterBegin", "showCharacterEnd"] },
 						filter(event, player) {
 							return get
 								.character(event[event.name == "hideCharacter" ? "toHide" : "toShow"], 3)
@@ -4495,7 +4501,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					);
 					await game.cardsGotoOrdering(cards);
 					for (const card of cards) {
-						if (player.hasUseTarget(card, false, false)) {
+						if (player.hasUseTarget(card, false, false) || (get.info(card).notarget && lib.filter.cardEnabled(card, player))) {
 							await player.chooseUseTarget(card, true, false, "nodistance");
 						} else gains.push(card);
 					}
@@ -10001,8 +10007,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			gzshensu: {
 				audio: "shensu1",
 				audioname: ["xiahouba", "re_xiahouyuan", "ol_xiahouyuan"],
-				group: ["shensu1", "shensu2"],
-				preHidden: ["shensu1", "shensu2", "gzshensu"],
+				group: ["gzshensu_1", "gzshensu_2"],
+				preHidden: ["gzshensu_1", "gzshensu_2", "gzshensu"],
 				trigger: { player: "phaseDiscardBegin" },
 				direct: true,
 				filter: function (event, player) {
@@ -10013,7 +10019,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					player
 						.chooseTarget(
 							get.prompt("gzshensu"),
-							"失去1点体力并跳过弃牌阶段，视为对一名其他角色使用使用一张无距离限制的【杀】",
+							"失去1点体力并跳过弃牌阶段，视为对一名其他角色使用一张无距离限制的【杀】",
 							function (card, player, target) {
 								return player.canUse("sha", target, false);
 							}
@@ -10033,6 +10039,17 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						trigger.cancel();
 						player.useCard({ name: "sha", isCard: true }, target, false);
 					}
+				},
+				subSkill: {
+					1: {
+						audio: "shensu1",
+						inherit: "shensu1",
+						sourceSkill: "gzshensu",
+					},
+					2: {
+						inherit: "shensu2",
+						sourceSkill: "gzshensu",
+					},
 				},
 			},
 			//吕玲绮
@@ -11672,6 +11689,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					if (Math.min(target.maxHp, target.countCards("h")) > 3) return true;
 					return false;
 				},
+				usable: 1,
 				preHidden: true,
 				content: function () {
 					"step 0";
@@ -15817,7 +15835,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				},
 				selectTarget: 2,
 				multitarget: true,
-				targetprompt: ["受到伤害</br>然后摸牌", "回复体力"],
+				targetprompt: ["受伤摸牌", "回复体力"],
 				content: function () {
 					"step 0";
 					targets[0].damage(player);
@@ -18082,6 +18100,9 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				},
 				forced: true,
 				preHidden: true,
+				check: function (event, player) {
+					return true;
+				},
 				filter: function (event, player) {
 					if (event.num <= 0 || !event.source) return false;
 					var n1 = player.getNext();
@@ -23076,8 +23097,112 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			},
 		},
 		translate: {
-			ye: "野",
-			ye2: "野心家",
+			// 临时修复使用国战武将关闭后国战武将包翻译丢失的bug
+			gz_caocao: "曹操",
+			gz_caopi: "曹丕",
+			gz_dianwei: "典韦",
+			gz_guojia: "郭嘉",
+			gz_simayi: "司马懿",
+			gz_xiahoudun: "夏侯惇",
+			gz_xunyu: "荀彧",
+			gz_xuzhu: "许褚",
+			gz_yuejin: "乐进",
+			gz_zhanghe: "张郃",
+			gz_zhangliao: "张辽",
+			gz_zhenji: "甄宓",
+			gz_ganfuren: "甘夫人",
+			gz_guanyu: "关羽",
+			gz_huangyueying: "黄月英",
+			gz_liubei: "刘备",
+			gz_liushan: "刘禅",
+			gz_machao: "马超",
+			gz_menghuo: "孟获",
+			gz_pangtong: "庞统",
+			gz_zhangfei: "张飞",
+			gz_zhaoyun: "赵云",
+			gz_sp_zhugeliang: "卧龙",
+			gz_zhugeliang: "诸葛亮",
+			gz_zhurong: "祝融",
+			gz_daqiao: "大乔",
+			gz_dingfeng: "丁奉",
+			gz_ganning: "甘宁",
+			gz_huanggai: "黄盖",
+			gz_re_lusu: "鲁肃",
+			gz_luxun: "陆逊",
+			gz_lvmeng: "吕蒙",
+			gz_sunjian: "孙坚",
+			gz_sunquan: "孙权",
+			gz_sunshangxiang: "孙尚香",
+			gz_xiaoqiao: "小乔",
+			gz_zhangzhang: "张昭张纮",
+			gz_zhouyu: "周瑜",
+			gz_caiwenji: "蔡琰",
+			gz_diaochan: "貂蝉",
+			gz_huatuo: "华佗",
+			gz_jiaxu: "贾诩",
+			gz_lvbu: "吕布",
+			gz_yanwen: "颜良文丑",
+			gz_re_yuanshao: "袁绍",
+			gz_caohong: "曹洪",
+			gz_dengai: "邓艾",
+			gz_jiangwei: "姜维",
+			gz_xusheng: "徐盛",
+			gz_hetaihou: "何太后",
+			gz_zangba: "臧霸",
+			gz_chendong: "陈武董袭",
+			gz_sunce: "孙策",
+			gz_xunyou: "荀攸",
+			gz_lingtong: "凌统",
+			gz_zuoci: "左慈",
+			gz_wuguotai: "吴国太",
+			gz_zhuling: "朱灵",
+			gz_liuba: "刘巴",
+			gz_wujing: "吴景",
+			gz_zhugeke: "诸葛恪",
+			gz_yanbaihu: "严虎",
+			gz_gongsunyuan: "公孙渊",
+			gz_simazhao: "司马昭",
+			gz_zhonghui: "钟会",
+			gz_xuyou: "许攸",
+			gz_xiahouba: "夏侯霸",
+			gz_panjun: "潘濬",
+			gz_shibao: "石苞",
+			gz_simazhou: "司马伷",
+			gz_weiguan: "卫瓘",
+			gz_xinchang: "辛敞",
+			gz_yangyan: "杨艳",
+			gz_yangzhi: "杨芷",
+			gz_zhanghuyuechen: "张虎乐綝",
+			gz_zhongyan: "钟琰",
+			gz_zuofen: "左棻",
+			gz_huaxin: "华歆",
+			gz_jianggan: "蒋干",
+			gz_dc_yanghu: "羊祜",
+			gz_zongyu: "宗预",
+			gz_fengxi: "冯熙",
+			gz_luyusheng: "陆郁生",
+			gz_re_xunchen: "荀谌",
+			gz_yangwan: "杨婉",
+			gz_yanyan: "严颜",
+			gz_zhouyi: "周夷",
+			gz_gaoshun: "高顺",
+			gz_lvlingqi: "吕玲绮",
+			gz_lingcao: "凌操",
+			gz_tw_xiahoushang: "夏侯尚",
+			gz_yangxiu: "杨修",
+			gz_chendao: "陈到",
+			gz_liaohua: "廖化",
+			gz_zhugejin: "诸葛瑾",
+			gz_zumao: "祖茂",
+			gz_fuwan: "伏完",
+			gz_tw_liufuren: "刘夫人",
+			gz_beimihu: "卑弥呼",
+			gz_re_nanhualaoxian: "南华老仙",
+			gz_guanqiujian: "毌丘俭",
+			gz_guohuai: "郭淮",
+			gz_zhujun: "朱儁",
+			gz_chengong: "陈宫",
+
 			yexinjia_mark: "野心家",
 
 			bumingzhi: "不明置",
@@ -23239,8 +23364,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			gzlianpian_info:
 				"①结束阶段，若你于此回合内弃置过所有角色的牌数之和大于你的体力值，你可令一名与你势力相同的角色将手牌补至X张（X为其体力上限）。②其他角色的结束阶段，若其于此回合内弃置过所有角色的牌数之和大于你的体力值，其可选择：1.弃置你的一张牌；2.令你回复1点体力。",
 			gzyusui: "玉碎",
-			gzyusui_info:
-				"当你成为其他势力的角色使用黑色牌的目标后，你可以失去1点体力，然后选择一项：①令其弃置X张手牌（X为其体力上限）；②令其失去Y点体力（Y为其的体力值减去你的体力值，不为正时不可选择）。",
+			gzyusui_info: "每回合限一次，当你成为其他势力的角色使用黑色牌的目标后，你可以失去1点体力，然后选择一项：①令其弃置X张手牌（X为其体力上限）；②令其失去Y点体力（Y为其的体力值减去你的体力值，不为正时不可选择）。",
 			gzboyan: "驳言",
 			gzboyan_info:
 				"出牌阶段限一次，你可令一名其他角色将手牌摸至体力上限（至多摸五张），然后其本回合不能使用或打出手牌。",
@@ -24071,6 +24195,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			fakekeshou: "恪守",
 			fakekeshou_info:
 				"①当你受到伤害时，你可以弃置两张颜色相同的牌并令此伤害-1。②当你因弃置而一次性失去至少两张牌后，若你的势力已确定且场上没有与你势力相同的其他角色，则你可以进行判定，若结果判定为红色，你摸一张牌。",
+			gz_re_xusheng: "界徐盛",
+			gz_re_xusheng_prefix: "界",
 
 			guozhan_default: "国战标准",
 			guozhan_zhen: "君临天下·阵",
@@ -24078,16 +24204,18 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 			guozhan_bian: "君临天下·变",
 			guozhan_quan: "君临天下·权",
 			guozhan_single: "君临天下EX",
-			guozhan_double: "双势力武将",
 			guozhan_jun: "君主武将",
 			guozhan_yexinjia: "野心家武将",
+			guozhan_double: "双势力武将",
+			// 暂不更新
+			// guozhan_online: "Online专属",
 			guozhan_jin: "文德武备",
 			guozhan_zongheng: "纵横捭阖",
 			guozhan_decade: "十年踪迹十年心",
-			guozhan_mobile: "移动版",
-			guozhan_qunxiong: "群雄割据",
+			guozhan_mobile: "移动版专属",
 			guozhan_tw: "海外服专属",
 			guozhan_others: "线下版",
+			guozhan_qunxiong: "群雄割据",
 		},
 		junList: ["liubei", "zhangjiao", "sunquan", "caocao"],
 		guozhanPile_yingbian: [
@@ -25415,144 +25543,6 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						(lib.perfectPair[name1] && lib.perfectPair[name1].flat(Infinity).includes(name2)) ||
 						(lib.perfectPair[name2] && lib.perfectPair[name2].flat(Infinity).includes(name1))
 					);
-				},
-				siege: function (player) {
-					if (this.identity == "unknown" || this.hasSkill("undist")) return false;
-					if (!player) {
-						var next = this.getNext();
-						if (next && next.sieged()) return true;
-						var previous = this.getPrevious();
-						if (previous && previous.sieged()) return true;
-						return false;
-					} else {
-						return player.sieged() && (player.getNext() == this || player.getPrevious() == this);
-					}
-				},
-				sieged: function (player) {
-					if (this.identity == "unknown") return false;
-					if (player) {
-						return player.siege(this);
-					} else {
-						var next = this.getNext();
-						var previous = this.getPrevious();
-						if (next && previous && next != previous) {
-							if (next.identity == "unknown" || next.isFriendOf(this)) return false;
-							return next.isFriendOf(previous);
-						}
-						return false;
-					}
-				},
-				inline: function () {
-					if (this.identity == "unknown" || this.identity == "ye" || this.hasSkill("undist"))
-						return false;
-					var next = this,
-						previous = this;
-					var list = [];
-					for (var i = 0; next || previous; i++) {
-						if (next) {
-							next = next.getNext();
-							if (!next.isFriendOf(this) || next == this) {
-								next = null;
-							} else {
-								list.add(next);
-							}
-						}
-						if (previous) {
-							previous = previous.getPrevious();
-							if (!previous.isFriendOf(this) || previous == this) {
-								previous = null;
-							} else {
-								list.add(previous);
-							}
-						}
-					}
-					if (!list.length) return false;
-					for (var i = 0; i < arguments.length; i++) {
-						if (!list.includes(arguments[i]) && arguments[i] != this) return false;
-					}
-					return true;
-				},
-				isMajor: function () {
-					if (this.identity == "unknown") return false;
-					var list = game.filterPlayer(function (current) {
-						return current.identity != "unknown" && current.hasSkillTag("forceMajor");
-					});
-					if (list.length) {
-						for (var i of list) {
-							if (i.isFriendOf(this)) return true;
-						}
-						return false;
-					}
-					var map = {},
-						sides = [],
-						pmap = _status.connectMode ? lib.playerOL : game.playerMap,
-						player;
-					for (var i of game.players) {
-						if (i.identity == "unknown") continue;
-						var added = false;
-						for (var j of sides) {
-							if (i.isFriendOf(pmap[j])) {
-								added = true;
-								map[j].push(i);
-								if (i == this) player = j;
-								break;
-							}
-						}
-						if (!added) {
-							map[i.playerid] = [i];
-							sides.push(i.playerid);
-							if (i == this) player = i.playerid;
-						}
-					}
-					if (!player || map[player].length < 2) return false;
-					for (var i in map) {
-						if (map[i].length > map[player].length) return false;
-					}
-					return true;
-				},
-				isNotMajor: function () {
-					for (var i = 0; i < game.players.length; i++) {
-						if (game.players[i].isMajor()) {
-							return !this.isMajor();
-						}
-					}
-					return false;
-				},
-				isMinor: function (nomajor) {
-					if (this.identity == "unknown" || (!nomajor && this.isMajor())) return false;
-					if (
-						!nomajor &&
-						!game.hasPlayer(function (current) {
-							return current.isMajor();
-						})
-					) {
-						return false;
-					}
-					var map = {},
-						sides = [],
-						pmap = _status.connectMode ? lib.playerOL : game.playerMap,
-						player;
-					for (var i of game.players) {
-						if (i.identity == "unknown") continue;
-						var added = false;
-						for (var j of sides) {
-							if (i.isFriendOf(pmap[j])) {
-								added = true;
-								map[j].push(i);
-								if (i == this) player = j;
-								break;
-							}
-						}
-						if (!added) {
-							map[i.playerid] = [i];
-							sides.push(i.playerid);
-							if (i == this) player = i.playerid;
-						}
-					}
-					for (var i in map) {
-						if (map[i].length < map[player].length) return false;
-					}
-					return true;
 				},
 				logAi: function (targets, card) {
 					if (this.ai.shown == 1 || this.isMad()) return;

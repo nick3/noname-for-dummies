@@ -359,6 +359,31 @@ export class Player extends HTMLDivElement {
 	 * @type { boolean | undefined }
 	 */
 	identityShown;
+	/**
+	 * 获取一名角色的名字翻译
+	 * @param {boolean} forDialog 是否用于对话框显示，如【五谷丰登】/【惠民】之类多名角色选择卡牌的卡牌/技能的content中，方便知晓卡牌和角色的对应关系。默认为false。
+	 * @returns { string } 角色名字翻译，forDialog为true会返回HTML字符串，为对话框中的卡牌呈现类似卡牌动画信息的效果，否则根据player._tempTranslate、lib.translate[`${player.name}_ab`]、get.translation(player.name)的优先级返回纯文本。
+	 */
+	getName(forDialog = false) {
+		const { name } = this;
+		let playername, hasTempTranslate;
+		if (this._tempTranslate) {
+			playername = this._tempTranslate;
+			hasTempTranslate = true;
+		} else if (lib.translate[`${name}_ab`]) {
+			playername = lib.translate[`${name}_ab`];
+		} else {
+			playername = get.translation(name);
+		}
+		if (!forDialog) {
+			return playername;
+		} else {
+			const SeatNum = this.getSeatNum();
+			const addSeat = game.hasPlayer2(current => current != this && current.getName() == playername, true) && typeof SeatNum == "number";
+			const border = get.groupnature(get.bordergroup(name));
+			return `<span style="font-weight:560"><span data-nature=${border}><span style="letter-spacing:0.1em">${!hasTempTranslate ? get.slimName(name) : playername}${addSeat ? `[${SeatNum}]` : ""}</span></span><br/><span style="color:#FFD700">`;
+		}
+	}
 	//新函数
 	/**
 	 * 怒气
@@ -1364,6 +1389,10 @@ export class Player extends HTMLDivElement {
 		} else {
 			rangex.push(...new Set(ranges));
 		}
+		if (get.itemtype(name) == "card") {
+			const owner = get.owner(name, "judge");
+			if (owner && !lib.filter.canBeGained(name, this, owner)) return false;
+		}
 		for (let range of rangex) {
 			let num = this.countEquipableSlot(range);
 			let num2 = get.numOf(rangex, range);
@@ -1969,7 +1998,7 @@ export class Player extends HTMLDivElement {
 	tryJudgeAnimate(bool) {
 		game.broadcast(
 			function (player, bool) {
-				player.trySkillAnimate(bool);
+				player.tryJudgeAnimate(bool);
 			},
 			this,
 			bool
@@ -2590,7 +2619,8 @@ export class Player extends HTMLDivElement {
 			map = { skill: map };
 		}
 		for (const i of ["name", "name1", "name2"]) {
-			if (i == "name1" && this.name === this.name1) continue;
+			if (i == "name" && get.mode() == "guozhan") continue;
+			if (i == "name1" && this.name === this.name1 && get.mode() != "guozhan") continue;
 			const list = lib.characterSubstitute[this[i]];
 			if (this[i] && list) {
 				const name = i == "name2" ? "name2" : "name";
@@ -3617,6 +3647,68 @@ export class Player extends HTMLDivElement {
 			this.updateMark(i);
 		}
 	}
+	/**
+	 * 获得蓄力点
+	 * @param { number } [num = 1] 获得蓄力点数
+	 * @param { boolean } [log] false: 不进行广播
+	 */
+	addCharge(num, log) {
+		if (typeof num != "number" || !num) {
+			num = 1;
+		}
+		let maxCharge = this.getMaxCharge();
+		if (maxCharge == Infinity) {
+			this.addMark("charge", num, log);
+		} else {
+			num = Math.min(num, maxCharge - this.countMark("charge"));
+			if (num > 0) {
+				this.addMark("charge", num, log);
+			}
+		}
+	}
+	/**
+	 * 移去蓄力点
+	 * @param { number } [num = 1] 移去蓄力点数
+	 * @param { boolean } [log] false: 不进行广播
+	 */
+	removeCharge(num, log) {
+		if (typeof num != "number" || !num) num = 1;
+		num = Math.min(num, this.countMark("charge"));
+		if(num > 0) this.removeMark("charge", num, log);
+	}
+	/**
+	 * 返回玩家的蓄力点数
+	 * @param { boolean } [max] true: 返回当前蓄力点与上限之差
+	 * @returns { number }
+	 */
+	countCharge(max) {
+		if (max) {
+			if (this.getMaxCharge() == Infinity) {
+				return Infinity;
+			}
+			return this.getMaxCharge() - this.countMark("charge");
+		}
+		return this.countMark("charge");
+	}
+	/**
+	 * 获取蓄力点上限
+	 */
+	getMaxCharge() {
+		let skills = game.expandSkills(this.getSkills(null, null, false).concat(lib.skill.global));
+		let max = 0;
+		for (let skill of skills) {
+			let info = get.info(skill);
+			if (!info || !info.chargeSkill || typeof info.chargeSkill != "number") {
+				continue;
+			}
+			if (info.chargeSkill == Infinity) {
+				return Infinity;
+			}
+			max += info.chargeSkill;
+		}
+		max = game.checkMod(this, max, "maxCharge", this);
+		return typeof max == "number" ? Math.max(0, max) : Infinity;
+	}
 	num(arg1, arg2, arg3) {
 		if (get.itemtype(arg1) == "position") {
 			return this.get(arg1, arg2, arg3).length;
@@ -3768,20 +3860,22 @@ export class Player extends HTMLDivElement {
 		if (typeof arg1 != "string") {
 			arg1 = "h";
 		}
-		const getCardName = (card) => {
+		const getCardName = card => {
 			if (card.parentNode == this.node.judges) {
-				if (card.viewAs) return card.viewAs;
+				if (card.viewAs) {
+					return card.viewAs;
+				}
 			}
 			return get.name(card);
 		};
-		let filter;
+		let filter = card => true;
 		if (arg2) {
 			if (typeof arg2 == "string") {
-				filter = (card) => getCardName(card) == arg2;
+				filter = card => getCardName(card) == arg2;
 			} else if (Array.isArray(arg2)) {
-				filter = (card) => arg2.includes(getCardName(card));
+				filter = card => arg2.includes(getCardName(card));
 			} else if (typeof arg2 == "object") {
-				filter = (card) => {
+				filter = card => {
 					for (let j in arg2) {
 						var value;
 						if (j == "type" || j == "subtype" || j == "color" || j == "suit" || j == "number") {
@@ -3791,10 +3885,7 @@ export class Player extends HTMLDivElement {
 						} else {
 							value = card[j];
 						}
-						if (
-							(typeof arg2[j] == "string" && value != arg2[j]) ||
-							(Array.isArray(arg2[j]) && !arg2[j].includes(value))
-						) {
+						if ((typeof arg2[j] == "string" && value != arg2[j]) || (Array.isArray(arg2[j]) && !arg2[j].includes(value))) {
 							return false;
 						}
 					}
@@ -3803,48 +3894,29 @@ export class Player extends HTMLDivElement {
 			} else if (typeof arg2 == "function") {
 				filter = arg2;
 			}
-		} else {
-			filter = (card) => true;
 		}
 		for (let i = 0; i < arg1.length; i++) {
 			if (arg1[i] == "h") {
 				for (let card of get.iterableChildNodes(this.node.handcards1, this.node.handcards2)) {
-					if (
-						!card.classList.contains("removing") &&
-						!card.classList.contains("glows") &&
-						filter(card)
-					) {
+					if (!card.classList.contains("removing") && !card.classList.contains("glows") && filter(card)) {
 						yield card;
 					}
 				}
 			} else if (arg1[i] == "s") {
 				for (let card of get.iterableChildNodes(this.node.handcards1, this.node.handcards2)) {
-					if (
-						!card.classList.contains("removing") &&
-						card.classList.contains("glows") &&
-						filter(card)
-					) {
+					if (!card.classList.contains("removing") && card.classList.contains("glows") && filter(card)) {
 						yield card;
 					}
 				}
 			} else if (arg1[i] == "e") {
 				for (let card of get.iterableChildNodes(this.node.equips)) {
-					if (
-						!card.classList.contains("removing") &&
-						!card.classList.contains("feichu") &&
-						!card.classList.contains("emptyequip") &&
-						filter(card)
-					) {
+					if (!card.classList.contains("removing") && !card.classList.contains("feichu") && !card.classList.contains("emptyequip") && filter(card)) {
 						yield card;
 					}
 				}
 			} else if (arg1[i] == "j") {
 				for (let card of get.iterableChildNodes(this.node.judges)) {
-					if (
-						!card.classList.contains("removing") &&
-						!card.classList.contains("feichu") &&
-						filter(card)
-					) {
+					if (!card.classList.contains("removing") && !card.classList.contains("feichu") && filter(card)) {
 						yield card;
 					}
 				}
@@ -4575,7 +4647,7 @@ export class Player extends HTMLDivElement {
 			}
 		}
 		if (next.isMine() == false && next.dialog) next.dialog.style.display = "none";
-		if (next.filterCard == undefined) next.filterCard = lib.filter.all;
+		if (next.filterCard == undefined) next.filterCard = lib.filter.cardDiscardable;
 		if (next.selectCard == undefined) next.selectCard = [1, 1];
 		if (next.ai == undefined) next.ai = get.unuseful;
 		next.autochoose = function () {
@@ -5070,6 +5142,55 @@ export class Player extends HTMLDivElement {
 			next.num2 = 1;
 		}
 		next.setContent("chooseDrawRecover");
+		return next;
+	}
+	/**
+	 * 选择一或多个数值
+	 */
+	chooseNumbers() {
+		const next = game.createEvent("chooseNumbers");
+		next.player = this;
+		next.list = [];
+		for (const argument of arguments) {
+			if (typeof argument == "string") {
+				get.evtprompt(next, argument);
+			} else if (typeof argument == "number") {
+				next.optionSum = argument;
+			} else if (typeof argument == "boolean") {
+				next.forced = argument;
+			} else if (typeof argument == "object" && Array.isArray(argument)) {
+				next.list.push(...argument);
+			} else if (typeof argument == "function") {
+				if (!next.processAI) {
+					next.processAI = argument;
+				} else {
+					next.filterSelect = argument;
+				}
+			}
+		}
+		if (!next.list.length) {
+			_status.event.next.remove(next);
+			next.resolve();
+		}
+		if (!next.filterSelect) {
+			if (next.optionSum) {
+				next.filterSelect = (num, index, event) => num + event.numbers.reduce((sum, num) => sum + num, 0) - (event.numbers[index] || 0) <= event.optionSum;
+			} else {
+				next.filterSelect = () => true;
+			}
+		}
+		if (!next.filterOk) {
+			if (next.optionSum) {
+				next.filterOk = event => event.numbers.reduce((sum, num) => sum + num, 0) <= event.optionSum;
+			} else {
+				next.filterOk = () => true;
+			}
+		}
+		if (!next.forced) {
+			next.forced = false;
+		}
+		next.setContent("chooseNumbers");
+		next._args = Array.from(arguments);
 		return next;
 	}
 	choosePlayerCard() {
@@ -5592,10 +5713,10 @@ export class Player extends HTMLDivElement {
 		return next;
 	}
 	randomDiscard() {
-		var position = "he",
+		let position = "he",
 			num = 1,
 			delay = null;
-		for (var i = 0; i < arguments.length; i++) {
+		for (let i = 0; i < arguments.length; i++) {
 			if (typeof arguments[i] == "number") {
 				num = arguments[i];
 			} else if (get.itemtype(arguments[i]) == "position") {
@@ -5604,14 +5725,12 @@ export class Player extends HTMLDivElement {
 				delay = arguments[i];
 			}
 		}
-		var cards = this.getCards(position).randomGets(num);
-		if (cards.length) {
-			var next = this.discard(cards, "notBySelf");
-			if (typeof delay == "boolean") {
-				next.delay = delay;
-			}
+		const cards = this.getDiscardableCards(this, position).randomGets(num);
+		const next = this.discard(cards, "notBySelf");
+		if (typeof delay == "boolean") {
+			next.delay = delay;
 		}
-		return cards;
+		return next;
 	}
 	randomGain() {
 		var position = "he",
@@ -5666,6 +5785,104 @@ export class Player extends HTMLDivElement {
 			next.resolve();
 		}
 		next.setContent("discard");
+		return next;
+	}
+	/**
+	 * 令玩家弃置其区域内一些能被弃置的牌
+	 *
+	 * cards: Card[] | Card;
+	 * 要弃置的牌
+	 *
+	 * source?: Player;
+	 * 来源，令Player弃牌的角色。默认目标角色
+	 *
+	 * position?: div | fragment;
+	 * 经Mod筛选后的牌要置入的区域，默认ui.discardPile
+	 *
+	 * log?: 'popup' | 'logSkill' | false | string;
+	 * 因对应Mod技能导致部分牌未被弃置时，是否为Mod技能执行对应函数。默认'popup'
+	 *
+	 * @returns { GameEventPromise }
+	 */
+	modedDiscard() {
+		var next = game.createEvent("discard");
+		next.player = this;
+		next.source = this;
+		next.cards = [];
+		next.log = "popup";
+		for (let i = 0; i < arguments.length; i++) {
+			if (get.itemtype(arguments[i]) === "player") {
+				next.source = arguments[i];
+				if (this !== next.source) next.notBySelf = true;
+			} else if (get.itemtype(arguments[i]) === "cards") {
+				next.cards = arguments[i].slice(0);
+			} else if (get.itemtype(arguments[i]) === "card") {
+				next.cards = [arguments[i]];
+			} else if (["div", "fragment"].includes(get.objtype(arguments[i]))) {
+				next.position = arguments[i];
+			} else if (arguments[i] === false || typeof arguments[i] === "string") {
+				next.log = arguments[i];
+			}
+		}
+		if (!next.cards.length) {
+			_status.event.next.remove(next);
+			next.resolve();
+		}
+		next.skills = [];
+		next.protected_cards = [];
+		let event = _status.event;
+		if (typeof event !== "string") event = event.getParent().name;
+		let skills = [];
+		if (typeof this.getModableSkills === "function") {
+			skills = this.getModableSkills();
+		} else if (typeof this.getSkills === "function") {
+			skills = this.getSkills().concat(lib.skill.global);
+			game.expandSkills(skills);
+			skills = skills.filter(i => {
+				const info = get.info(i);
+				return info && info.mod;
+			});
+			skills.sort((a, b) => get.priority(a) - get.priority(b));
+		}
+		for (let skill of skills) {
+			let mod = get.info(skill).mod.canBeDiscarded;
+			if (mod)
+				for (let i = 0; i < next.cards.length; i++) {
+					let arg = [next.cards[i], next.source, this, event, "unchanged"],
+						result = mod.call(game, ...arg);
+					if (result !== undefined && typeof arg[arg.length - 1] !== "object") arg[arg.length - 1] = result;
+					if (!arg[arg.length - 1]) {
+						next.skills.add(skill);
+						next.protected_cards.push(next.cards.splice(i--, 1)[0]);
+					}
+				}
+			mod = get.info(skill).mod.cardDiscardable;
+			if (mod)
+				for (let i = 0; i < next.cards.length; i++) {
+					let arg = [next.cards[i], this, event, "unchanged"],
+						result = mod.call(game, ...arg);
+					if (result !== undefined && typeof arg[arg.length - 1] !== "object") arg[arg.length - 1] = result;
+					if (!arg[arg.length - 1]) {
+						next.skills.add(skill);
+						next.protected_cards.push(next.cards.splice(i--, 1)[0]);
+					}
+				}
+		}
+		next.setContent(function () {
+			"step 0";
+			if (event.skills.length && event.log)
+				for (let i of event.skills) {
+					if (typeof player[event.log] === "function") player[event.log](i);
+				}
+			if (!cards.length) event.finish();
+			"step 1";
+			game.log(player, "弃置了", cards);
+			event.done = player.lose(cards, event.position, "visible");
+			event.done.type = "discard";
+			if (event.discarder) event.done.discarder = event.discarder;
+			"step 2";
+			event.trigger("discard");
+		});
 		return next;
 	}
 	loseToDiscardpile() {
@@ -8084,7 +8301,9 @@ export class Player extends HTMLDivElement {
 		if (!nounmark) this.unmarkSkill(skill);
 		this.disableSkill(skill + "_awake", skill);
 		this.awakenedSkills.add(skill);
-		if (this.storage[skill] === false) this.storage[skill] = true;
+		if (this.storage[skill] === undefined || this.storage[skill] === false) {
+			this.storage[skill] = true;
+		}
 		_status.event.clearStepCache();
 		return this;
 	}
@@ -8863,17 +9082,18 @@ export class Player extends HTMLDivElement {
 		num = game.checkMod(this, num, "maxHandcardFinal", this);
 		return Math.max(0, num);
 	}
-	getEnemies(func) {
+	getEnemies(func, includeDie) {
 		var player = this;
 		var targets;
 		var mode = get.mode();
+		let method = includeDie ? "filterPlayer2" : "filterPlayer";
 		if (mode == "identity") {
 			if (_status.mode == "purple") {
 				switch (player.identity) {
 					case "bZhu":
 					case "bZhong":
 					case "rNei":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["rZhu", "rZhong", "bNei"].includes(target.identity);
 						});
@@ -8881,14 +9101,14 @@ export class Player extends HTMLDivElement {
 					case "rZhu":
 					case "rZhong":
 					case "bNei":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["bZhu", "bZhong", "rNei"].includes(target.identity);
 						});
 						break;
 					case "rYe":
 					case "bYe":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return !["rYe", "bYe"].includes(target.identity);
 						});
@@ -8900,14 +9120,14 @@ export class Player extends HTMLDivElement {
 					case "zhu":
 					case "zhong":
 					case "mingzhong":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							if (num >= 3) return target.identity == "fan";
 							return target.identity == "nei" || target.identity == "fan";
 						});
 						break;
 					case "nei":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							if (num >= 3) return target.identity == "fan";
 							if (game.players.length == 2) return target != player;
@@ -8919,13 +9139,13 @@ export class Player extends HTMLDivElement {
 						});
 						break;
 					case "fan":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return target.identity != "fan";
 						});
 						break;
 					case "commoner":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							if (num >= 3) return target.identity != "fan";
 							return target.identity == "fan";
@@ -8935,24 +9155,24 @@ export class Player extends HTMLDivElement {
 			}
 		} else if (mode == "guozhan") {
 			if (player.identity == "ye") {
-				targets = game.filterPlayer(function (target) {
+				targets = game[method](function (target) {
 					if (func && !func(target)) return false;
 					return true;
 				});
 			} else {
 				var group = lib.character[player.name1][1];
-				targets = game.filterPlayer(function (target) {
+				targets = game[method](function (target) {
 					if (func && !func(target)) return false;
 					return target.identity == "ye" || lib.character[target.name1][1] != group;
 				});
 			}
 		} else if (mode == "doudizhu") {
-			targets = game.filterPlayer(function (target) {
+			targets = game[method](function (target) {
 				if (func && !func(target)) return false;
 				return target.identity != player.identity;
 			});
 		} else {
-			targets = game.filterPlayer(function (target) {
+			targets = game[method](function (target) {
 				if (func && !func(target)) return false;
 				return target.side != player.side;
 			});
@@ -8960,7 +9180,7 @@ export class Player extends HTMLDivElement {
 		targets.remove(player);
 		return targets;
 	}
-	getFriends(func) {
+	getFriends(func, includeDie) {
 		var player = this;
 		var targets = [];
 		var mode = get.mode();
@@ -8969,13 +9189,14 @@ export class Player extends HTMLDivElement {
 			func = null;
 			self = true;
 		}
+		let method = includeDie ? "filterPlayer2" : "filterPlayer";
 		if (mode == "identity") {
 			if (_status.mode == "purple") {
 				switch (player.identity) {
 					case "rZhu":
 					case "rZhong":
 					case "bNei":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["rZhu", "rZhong", "bNei"].includes(target.identity);
 						});
@@ -8983,14 +9204,14 @@ export class Player extends HTMLDivElement {
 					case "bZhu":
 					case "bZhong":
 					case "rNei":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["bZhu", "bZhong", "rNei"].includes(target.identity);
 						});
 						break;
 					case "rYe":
 					case "bYe":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["rYe", "bYe"].includes(target.identity);
 						});
@@ -9001,7 +9222,7 @@ export class Player extends HTMLDivElement {
 					case "zhu":
 					case "zhong":
 					case "mingzhong":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return ["zhu", "zhong", "mingzhong"].includes(target.identity);
 						});
@@ -9010,13 +9231,13 @@ export class Player extends HTMLDivElement {
 						targets = [];
 						break;
 					case "fan":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return target.identity == "fan";
 						});
 						break;
 					case "commoner":
-						targets = game.filterPlayer(function (target) {
+						targets = game[method](function (target) {
 							if (func && !func(target)) return false;
 							return true;
 						});
@@ -9028,18 +9249,18 @@ export class Player extends HTMLDivElement {
 				targets = [];
 			} else {
 				var group = lib.character[player.name1][1];
-				targets = game.filterPlayer(function (target) {
+				targets = game[method](function (target) {
 					if (func && !func(target)) return false;
 					return target.identity != "ye" && lib.character[target.name1][1] == group;
 				});
 			}
 		} else if (mode == "doudizhu") {
-			targets = game.filterPlayer(function (target) {
+			targets = game[method](function (target) {
 				if (func && !func(target)) return false;
 				return target.identity == player.identity;
 			});
 		} else {
-			targets = game.filterPlayer(function (target) {
+			targets = game[method](function (target) {
 				if (func && !func(target)) return false;
 				return target.side == player.side;
 			});
@@ -9074,11 +9295,11 @@ export class Player extends HTMLDivElement {
 		}
 		return this == player;
 	}
-	isFriendsOf(player) {
-		return player.getFriends(true).includes(this);
+	isFriendsOf(player, includeDie) {
+		return player.getFriends(true, includeDie).includes(this);
 	}
-	isEnemiesOf(player) {
-		return player.getEnemies().includes(this);
+	isEnemiesOf(player, includeDie) {
+		return player.getEnemies(null, includeDie).includes(this);
 	}
 	isAlive() {
 		return this.classList.contains("dead") == false;
@@ -9222,6 +9443,9 @@ export class Player extends HTMLDivElement {
 		}
 		return false;
 	}
+	isMine() {
+		return this == game.me && !_status.auto && !this.isMad() && !game.notMe;
+	}
 	isOnline() {
 		if (this.ws && lib.node && !this.ws.closed && this.ws.inited && !this.isAuto) {
 			return true;
@@ -9239,6 +9463,144 @@ export class Player extends HTMLDivElement {
 			return true;
 		}
 		return false;
+	}
+	isMajor() {
+		if (this.identity == "unknown") return false;
+		var list = game.filterPlayer(function (current) {
+			return current.identity != "unknown" && current.hasSkillTag("forceMajor");
+		});
+		if (list.length) {
+			for (var i of list) {
+				if (i.isFriendOf(this)) return true;
+			}
+			return false;
+		}
+		var map = {},
+			sides = [],
+			pmap = _status.connectMode ? lib.playerOL : game.playerMap,
+			player;
+		for (var i of game.players) {
+			if (i.identity == "unknown") continue;
+			var added = false;
+			for (var j of sides) {
+				if (i.isFriendOf(pmap[j])) {
+					added = true;
+					map[j].push(i);
+					if (i == this) player = j;
+					break;
+				}
+			}
+			if (!added) {
+				map[i.playerid] = [i];
+				sides.push(i.playerid);
+				if (i == this) player = i.playerid;
+			}
+		}
+		if (!player || map[player].length < 2) return false;
+		for (var i in map) {
+			if (map[i].length > map[player].length) return false;
+		}
+		return true;
+	}
+	isNotMajor() {
+		for (var i = 0; i < game.players.length; i++) {
+			if (game.players[i].isMajor()) {
+				return !this.isMajor();
+			}
+		}
+		return false;
+	}
+	isMinor(nomajor) {
+		if (this.identity == "unknown" || (!nomajor && this.isMajor())) return false;
+		if (
+			!nomajor &&
+			!game.hasPlayer(function (current) {
+				return current.isMajor();
+			})
+		) {
+			return false;
+		}
+		var map = {},
+			sides = [],
+			pmap = _status.connectMode ? lib.playerOL : game.playerMap,
+			player;
+		for (var i of game.players) {
+			if (i.identity == "unknown") continue;
+			var added = false;
+			for (var j of sides) {
+				if (i.isFriendOf(pmap[j])) {
+					added = true;
+					map[j].push(i);
+					if (i == this) player = j;
+					break;
+				}
+			}
+			if (!added) {
+				map[i.playerid] = [i];
+				sides.push(i.playerid);
+				if (i == this) player = i.playerid;
+			}
+		}
+		for (var i in map) {
+			if (map[i].length < map[player].length) return false;
+		}
+		return true;
+	}
+	siege(player) {
+		if (this.identity == "unknown" || this.hasSkill("undist")) return false;
+		if (!player) {
+			var next = this.getNext();
+			if (next && next.sieged()) return true;
+			var previous = this.getPrevious();
+			if (previous && previous.sieged()) return true;
+			return false;
+		} else {
+			return player.sieged() && (player.getNext() == this || player.getPrevious() == this);
+		}
+	}
+	sieged(player) {
+		if (this.identity == "unknown") return false;
+		if (player) {
+			return player.siege(this);
+		} else {
+			var next = this.getNext();
+			var previous = this.getPrevious();
+			if (next && previous && next != previous) {
+				if (next.identity == "unknown" || next.isFriendOf(this)) return false;
+				return next.isFriendOf(previous);
+			}
+			return false;
+		}
+	}
+	inline() {
+		if (this.identity == "unknown" || this.identity == "ye" || this.hasSkill("undist"))
+			return false;
+		var next = this,
+			previous = this;
+		var list = [];
+		for (var i = 0; next || previous; i++) {
+			if (next) {
+				next = next.getNext();
+				if (!next.isFriendOf(this) || next == this) {
+					next = null;
+				} else {
+					list.add(next);
+				}
+			}
+			if (previous) {
+				previous = previous.getPrevious();
+				if (!previous.isFriendOf(this) || previous == this) {
+					previous = null;
+				} else {
+					list.add(previous);
+				}
+			}
+		}
+		if (!list.length) return false;
+		for (var i = 0; i < arguments.length; i++) {
+			if (!list.includes(arguments[i]) && arguments[i] != this) return false;
+		}
+		return true;
 	}
 	checkShow(skill, showonly) {
 		var sourceSkill = get.info(skill);
@@ -9513,12 +9875,15 @@ export class Player extends HTMLDivElement {
 		if (typeof respond !== "string") respond = respond ? "respond" : "all";
 		return this.hasUsableCard("shan", respond);
 	}
+	/**
+	 * 以viewer视角猜测Player手里的杀
+	 * @param { Player } [viewer]
+	 * @param { "use" | "respond" } [type] 此杀用途："use"/"respond"，无则均加入
+	 * @param { Card[] | Card | null } [ignore] 此牌/这些牌不纳入考量
+	 * @param { "bool" | "count" | "odds" } [rvt]
+	 * @returns { boolean | number } 返回值：rvt:"bool"(默认)是否可能有杀，"count"推测有多少张杀，"odds"有杀的概率
+	 */
 	mayHaveSha(viewer, type, ignore, rvt) {
-		/**
-		 * type: skill tag type 'use', 'respond'
-		 * ignore: ignore cards, ui.selected.cards added
-		 * rvt: return value type 'count', 'odds', 'bool'(default)
-		 */
 		let count = 0;
 		if (
 			(this.hp > 2 || (!this.isZhu && this.hp > 1)) &&
@@ -9546,7 +9911,7 @@ export class Player extends HTMLDivElement {
 			return false;
 		}).length;
 		if (count && rvt !== "count") return rvt === "odds" ? 1 : true;
-		let hs = this.getCards("hs").filter((i) => !cards.includes(i)).length;
+		let hs = this.getCards("hs").filter(i => !cards.includes(i) && !selected.includes(i)).length;
 		if (!hs) {
 			if (rvt === "count") return count;
 			else if (rvt === "odds") return 0;
@@ -9561,12 +9926,15 @@ export class Player extends HTMLDivElement {
 		if (rvt === "odds") return Math.min(1, count);
 		return count > _status.event.getRand("mayHaveSha" + hs + this.playerid);
 	}
+	/**
+	 * 以viewer视角猜测Player手里的闪
+	 * @param { Player } [viewer]
+	 * @param { "use" | "respond" } [type] 此闪用途："use"/"respond"，无则均加入
+	 * @param { Card[] | Card | null } [ignore] 此牌/这些牌不纳入考量
+	 * @param { "bool" | "count" | "odds" } [rvt]
+	 * @returns { boolean | number } 返回值：rvt:"bool"(默认)是否可能有闪，"count"推测有多少张闪，"odds"有闪的概率
+	 */
 	mayHaveShan(viewer, type, ignore, rvt) {
-		/**
-		 * type: skill tag type 'use', 'respond' or object
-		 * ignore: ignore cards, ui.selected.cards added
-		 * rvt: return value type 'count', 'odds', 'bool'(default)
-		 */
 		let count = 0;
 		if (
 			(this.hp > 2 || (!this.isZhu && this.hp > 1)) &&
@@ -9594,7 +9962,7 @@ export class Player extends HTMLDivElement {
 			return false;
 		}).length;
 		if (count && rvt !== "count") return rvt === "odds" ? 1 : true;
-		let hs = this.getCards("hs").filter((i) => !cards.includes(i)).length;
+		let hs = this.getCards("hs").filter(i => !cards.includes(i) && !selected.includes(i)).length;
 		if (!hs) {
 			if (rvt === "count") return count;
 			else if (rvt === "odds") return 0;
@@ -10642,6 +11010,113 @@ export class Player extends HTMLDivElement {
 				}
 			}
 		}
+	}
+	$addVirtualEquip(card, cards) {
+		if (game.online) {
+			return;
+		}
+		const player = this;
+		const isViewAsCard = cards.length !== 1 || cards[0].name !== card.name || !card.isCard,
+			info = get.info(card, false);
+		let cardShownName = get.translation(card.name);
+		if (info.subtype === "equip3") {
+			cardShownName += "+";
+		} else if (info.subtype === "equip4") {
+			cardShownName += "-";
+		}
+		let cardx;
+		if (get.itemtype(card) == "card" && card.isViewAsCard) {
+			cardx = card;
+		} else {
+			cardx = isViewAsCard ? game.createCard(card.name, cards.length == 1 ? get.suit(cards[0]) : "none", cards.length == 1 ? get.number(cards[0]) : 0) : cards[0];
+		}
+		game.broadcastAll(
+			(player, cardx, isViewAsCard, card, cards, cardShownName) => {
+				cardx.fix();
+				if (!cardx.isViewAsCard) {
+					const cardSymbol = Symbol("card");
+					cardx.cardSymbol = cardSymbol;
+					cardx[cardSymbol] = card;
+				}
+				if (card.subtypes) {
+					cardx.subtypes = card.subtypes;
+				}
+				cardx.style.transform = "";
+				cardx.classList.remove("drawinghidden");
+				delete cardx._transform;
+				if (isViewAsCard && !cardx.isViewAsCard) {
+					cardx.isViewAsCard = true;
+					cardx.destroyLog = false;
+					for (let i of cards) {
+						i.goto(ui.special);
+						i.destiny = player.node.equips;
+					}
+					if (cardx.destroyed) {
+						cardx._destroyed_Virtua = cardx.destroyed;
+					}
+					cardx.destroyed = function (card, id, player, event) {
+						if (card._destroyed_Virtua) {
+							if (typeof card._destroyed_Virtua == "function") {
+								let bool = card._destroyed_Virtua(card, id, player, event);
+								if (bool === true) {
+									return true;
+								}
+							} else if (lib.skill[card._destroyed_Virtua]) {
+								if (player) {
+									if (player.hasSkill(card._destroyed_Virtua)) {
+										delete card._destroyed_Virtua;
+										return false;
+									}
+								}
+								return true;
+							} else if (typeof card._destroyed_Virtua == "string") {
+								return card._destroyed_Virtua == id;
+							} else if (card._destroyed_Virtua === true) {
+								return true;
+							}
+						}
+						if (id != "equip") {
+							return true;
+						}
+					};
+				}
+				const suit = get.translation(cardx.suit),
+					number = get.strNumber(cardx.number);
+				if (isViewAsCard) {
+					cardx.cards = cards || [];
+					cardx.viewAs = card.name;
+					cardx.node.name2.innerHTML = `${suit}${number} [${cardShownName}]`;
+					cardx.classList.add("fakeequip");
+				} else {
+					delete cardx.viewAs;
+					cardx.node.name2.innerHTML = `${suit}${number} ${cardShownName}`;
+					cardx.classList.remove("fakeequip");
+				}
+				let equipped = false,
+					equipNum = get.equipNum(cardx);
+				if (player.node.equips.childNodes.length) {
+					for (let i = 0; i < player.node.equips.childNodes.length; i++) {
+						if (get.equipNum(player.node.equips.childNodes[i]) >= equipNum) {
+							equipped = true;
+							player.node.equips.insertBefore(cardx, player.node.equips.childNodes[i]);
+							break;
+						}
+					}
+				}
+				if (equipped === false) {
+					player.node.equips.appendChild(cardx);
+					if (cards?.length && _status.discarded) {
+						_status.discarded.removeArray(cards);
+					}
+				}
+			},
+			player,
+			cardx,
+			isViewAsCard,
+			card,
+			cards,
+			cardShownName
+		);
 	}
 	$equip(card) {
 		game.broadcast(

@@ -1853,11 +1853,15 @@ game.import("card", function () {
 								}
 							}
 						}
+						if (target.countCards("h") * Math.max(target.hp, 5) > 6) return 0;
 					},
 					basic: {
 						order: 7,
 						useful: 4.5,
-						value: 9.2,
+						value(card, player) {
+							if (player.hp > 2) return 9.2;
+							return 9.2 - 0.7 * Math.min(3, player.countCards("hs"));
+						},
 					},
 					result: {
 						target: 2,
@@ -2084,14 +2088,12 @@ game.import("card", function () {
 						get.is.single() ? "he" : "hej"
 					);
 				},
-				content: function () {
+				async content(event, trigger, player) {
+					const target = event.target;
 					let pos = get.is.single() ? "he" : "hej";
-					if (target.countGainableCards(player, pos))
-						player
-							.gainPlayerCard(pos, target, true)
-							.set("target", target)
-							.set("complexSelect", false)
-							.set("ai", lib.card.shunshou.ai.button);
+					if (target.countGainableCards(player, pos)) {
+						await player.gainPlayerCard(pos, target, true).set("target", target).set("complexSelect", false).set("ai", lib.card.shunshou.ai.button);
+					}
 				},
 				ai: {
 					wuxie: function (target, card, player, viewer) {
@@ -3312,6 +3314,10 @@ game.import("card", function () {
 				},
 				charlotte: true,
 				filter: function (event, player) {
+					const evt = event.getParent("useCard", true, true);
+					if (evt && evt.effectedCount < evt.effectCount) {
+						return false;
+					}
 					return (
 						player.storage.qinggang2 &&
 						event.card &&

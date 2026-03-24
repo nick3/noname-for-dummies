@@ -215,35 +215,35 @@
 
 /* 拼点框露头高度调整 */
 /* 原版 */
-#arena[data-outcrop-skin='on']>.skill-dialog.compare>.content>.player-character>.image {
+#arena[data-outcrop-skingdtzpdk='on']>.skill-dialog.compare>.content>.player-character>.image {
 	height: 193px;
 	clip-path: url(#solo-clip);
     -webkit-clip-path: url(#solo-clip);
 }
 
 /* 十周年-电脑 */
-#arena[data-outcrop-skingdtz='shizhounianpc']>.skill-dialog.compare>.content>.player-character>.image {
+#arena[data-outcrop-skingdtzpdk='shizhounianpc']>.skill-dialog.compare>.content>.player-character>.image {
 	height: 193px;
 	clip-path: url(#solo-clip);
     -webkit-clip-path: url(#solo-clip);
 }
 
 /* 十周年-手机 */
-#arena[data-outcrop-skingdtz='shizhounianmobile']>.skill-dialog.compare>.content>.player-character>.image {
+#arena[data-outcrop-skingdtzpdk='shizhounianmobile']>.skill-dialog.compare>.content>.player-character>.image {
 	height: 193px;
 	clip-path: url(#solo-clip);
     -webkit-clip-path: url(#solo-clip);
 }
 
 /* 手杀 */
-#arena[data-outcrop-skingdtz='shousha']>.skill-dialog.compare>.content>.player-character>.image {
+#arena[data-outcrop-skingdtzpdk='shousha']>.skill-dialog.compare>.content>.player-character>.image {
 	height: 207px;
 	clip-path: url(#soloss-clip);
     -webkit-clip-path: url(#soloss-clip);
 }
 
 /* 新手杀 */
-#arena[data-outcrop-skingdtz='xinshousha']>.skill-dialog.compare>.content>.player-character>.image {
+#arena[data-outcrop-skingdtzpdk='xinshousha']>.skill-dialog.compare>.content>.player-character>.image {
 	height: 206px;
 	clip-path: url(#soloxss-clip);
     -webkit-clip-path: url(#soloxss-clip);
@@ -463,10 +463,3 @@
 	display: block !important;
 	opacity: 1;
 }
-
-
-
-
-
-
-

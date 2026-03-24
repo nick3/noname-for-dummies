@@ -28,7 +28,7 @@
 
 现更新者：[诗笺](https://github.com/nonameShijian)
 
-客户端平台：安卓Android、苹果iOS、鸿蒙HarmonyOS、Windows、Mac、Linux以及支持web内核的浏览器版本等
+客户端平台：安卓Android、苹果iOS、鸿蒙OS（HarmonyOS）、澎湃OS（HyperOS）、Windows、Mac、Linux以及支持web内核的浏览器版本等
 
 无名杀内置多种游戏模式和武将（及卡牌）包，拥有智能AI且可以实现单机、（弱）联机和局域网联机等多种游戏方式，并能通过扩展功能实现各种DIY设计，包括但不限于武将技能（含台词、配音）和卡牌设计、游戏模式设计、UI界面美化（含皮肤、特效）、功能扩展等
 
@@ -97,7 +97,6 @@
 下载途径2：真心喜欢本人（棘手怀念摧毁）懒人包的可加QQ群下载（入群答案在群简介里），手机版和电脑版懒人包都有，非诚勿扰
 
 - 无名杀懒人包-棘手怀念摧毁：469595619
-- 无名杀懒人包-棘手怀念摧毁交流群：725233902
 
 #### 安装教程
 
@@ -184,8 +183,6 @@ https://github.com/nonameShijian/noname-server
 客户端下载戳这里：
 
 GitHub： https://github.com/libccy/noname/releases/tag/chromium77-client
-
-docker: [docker.md](./docker/docker.md)
 
 网页端推荐使用 Chrome 系内核浏览器游玩，不推荐使用低版本 Firefox 浏览器
 

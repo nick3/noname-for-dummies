@@ -2,6 +2,143 @@ import { lib, game, ui, get, ai, _status } from "../noname.js";
 game.import("character", function () {
 	return {
 		name: "refresh",
+		connect: true,
+		connectBanned: [
+			
+		],
+		character: {
+			re_xushu: ["male", "shu", 4, ["zhuhai", "qianxin"]],
+			re_lidian: ["male", "wei", 3, ["xunxun", "xinwangxi"]],
+			re_zhongyao: ["male", "wei", 3, ["rehuomo", "zuoding"], ["clan:颍川钟氏"]],
+			xin_zhangliang: ["male", "qun", 4, ["rejijun", "refangtong"]],
+			re_simalang: ["male", "wei", 3, ["requji", "rejunbing"]],
+			re_zhugedan: ["male", "wei", 4, ["regongao", "rejuyi"]],
+			re_caorui: ["male", "wei", 3, ["huituo", "remingjian", "xingshuai"], ["zhu"]],
+			re_caochong: ["male", "wei", 3, ["rechengxiang", "renxin"]],
+			ol_zhangzhang: ["male", "wu", 3, ["olzhijian", "olguzheng"]],
+			re_jsp_huangyueying: ["female", "qun", 3, ["rejiqiao", "relinglong"]],
+			re_zhangsong: ["male", "shu", 3, ["qiangzhi", "rexiantu"]],
+			re_zhuzhi: ["male", "wu", 4, ["reanguo"]],
+			dc_caozhi: ["male", "wei", 3, ["reluoying", "dcjiushi"]],
+			ol_huangzhong: ["male", "shu", 4, ["xinliegong", "remoshi"]],
+			re_wenpin: ["male", "wei", 5, ["rezhenwei"]],
+			re_guanzhang: ["male", "shu", 4, ["fuhun", "retongxin"]],
+			re_mazhong: ["male", "shu", 4, ["refuman"]],
+			dc_chenqun: ["male", "wei", 3, ["repindi", "dcfaen"]],
+			re_sundeng: ["male", "wu", 4, ["rekuangbi"]],
+			re_caiyong: ["male", "qun", 3, ["rebizhuan", "retongbo"]],
+			re_chengong: ["male", "qun", 3, ["remingce", "zhichi"]],
+			re_xunyou: ["male", "wei", 3, ["reqice", "rezhiyu"], ["clan:颍川荀氏"]],
+			dc_liru: ["male", "qun", 3, ["xinjuece", "dcmieji", "dcfencheng"]],
+			re_zhuhuan: ["male", "wu", 4, ["refenli", "repingkou"]],
+			ol_dianwei: ["male", "wei", 4, ["olqiangxi", "olninge"]],
+			re_sp_taishici: ["male", "qun", 4, ["rejixu"]],
+			re_liufeng: ["male", "shu", 4, ["rexiansi"]],
+			ol_xunyu: ["male", "wei", 3, ["quhu", "oljieming"], ["clan:颍川荀氏"]],
+			re_liuchen: ["male", "shu", 4, ["rezhanjue", "reqinwang"], ["zhu"]],
+			dc_gongsunzan: ["male", "qun", 4, ["dcyicong", "dcqiaomeng"]],
+			re_duji: ["male", "wei", 3, ["reandong", "reyingshi"]],
+			re_jushou: ["male", "qun", 3, ["dcjianying", "dcshibei"]],
+			re_zhanghe: ["male", "wei", 4, ["reqiaobian"]],
+			dc_xushu: ["male", "shu", 4, ["rezhuhai", "xsqianxin"]],
+			xin_gaoshun: ["male", "qun", 4, ["decadexianzhen", "decadejinjiu"]],
+			re_guohuanghou: ["female", "wei", 3, ["rejiaozhao", "redanxin"]],
+			re_xiahoushi: ["female", "shu", 3, ["reqiaoshi", "reyanyu"]],
+			ol_lusu: ["male", "wu", 3, ["olhaoshi", "oldimeng"]],
+			re_jiaxu: ["male", "qun", 3, ["rewansha", "reluanwu", "reweimu"]],
+			re_guyong: ["male", "wu", 3, ["reshenxing", "rebingyi"]],
+			xin_zhonghui: ["male", "wei", 4, ["xinquanji", "xinzili"], ["clan:颍川钟氏"]],
+			re_caifuren: ["female", "qun", 3, ["reqieting", "rexianzhou"]],
+			re_guanping: ["male", "shu", 4, ["relongyin", "jiezhong"]],
+			re_guotufengji: ["male", "qun", 3, ["rejigong", "shifei"]],
+			re_zhoucang: ["male", "shu", 4, ["rezhongyong"]],
+			ol_zhurong: ["female", "shu", 4, ["juxiang", "lieren", "changbiao"]],
+			re_zhangchunhua: ["female", "wei", 3, ["rejueqing", "shangshi"]],
+			re_gongsunyuan: ["male", "qun", 4, ["rehuaiyi"]],
+			re_caozhen: ["male", "wei", 4, ["residi"]],
+			re_fuhuanghou: ["female", "qun", 3, ["rezhuikong", "reqiuyuan"]],
+			re_fazheng: ["male", "shu", 3, ["reenyuan", "rexuanhuo"]],
+			xin_lingtong: ["male", "wu", 4, ["decadexuanfeng", "yongjin"]],
+			xin_liubiao: ["male", "qun", 3, ["decadezishou", "decadezongshi"]],
+			re_caoxiu: ["male", "wei", 4, ["qianju", "reqingxi"]],
+			re_sunxiu: ["male", "wu", 3, ["reyanzhu", "rexingxue", "zhaofu"], ["zhu"]],
+			ol_dengai: ["male", "wei", 4, ["oltuntian", "olzaoxian"]],
+			re_gongsunzan: ["male", "qun", 4, ["reqiaomeng", "reyicong"]],
+			re_manchong: ["male", "wei", 3, ["rejunxing", "yuce"]],
+			xin_yufan: ["male", "wu", 3, ["xinzhiyan", "xinzongxuan"]],
+			dc_bulianshi: ["female", "wu", 3, ["dcanxu", "dczhuiyi"]],
+			re_hanhaoshihuan: ["male", "wei", 4, ["reshenduan", "reyonglve"]],
+			re_panzhangmazhong: ["male", "wu", 4, ["reduodao", "reanjian"]],
+			re_wangyi: ["female", "wei", 4, ["zhenlie", "miji"]],
+			re_madai: ["male", "shu", 4, ["mashu", "reqianxi"]],
+			xin_xusheng: ["male", "wu", 4, ["decadepojun"]],
+			re_taishici: ["male", "wu", 4, ["tianyi", "hanzhan"]],
+			re_masu: ["male", "shu", 3, ["resanyao", "rezhiman"]],
+			re_sunluban: ["female", "wu", 3, ["rechanhui", "rejiaojin"]],
+			xin_handang: ["male", "wu", 4, ["xingongji", "xinjiefan"]],
+			yujin_yujin: ["male", "wei", 4, ["decadezhenjun"], ["die_audio:xin_yujin"]],
+			re_caozhang: ["male", "wei", 4, ["xinjiangchi"]],
+			re_chengpu: ["male", "wu", 4, ["ollihuo", "rechunlao"]],
+			re_quancong: ["male", "wu", 4, ["xinyaoming"]],
+			re_liaohua: ["male", "shu", 4, ["xindangxian", "xinfuli"]],
+			re_guohuai: ["male", "wei", 4, ["decadejingce"]],
+			re_wuyi: ["male", "shu", 4, ["xinbenxi"], ["clan:陈留吴氏"]],
+			re_zhuran: ["male", "wu", 4, ["xindanshou"]],
+			ol_pangtong: ["male", "shu", 3, ["ollianhuan", "olniepan"], []],
+			re_zhangyi: ["male", "shu", 5, ["rewurong", "reshizhi"]],
+			xin_wuguotai: ["female", "wu", 3, ["xinganlu", "xinbuyi"]],
+			re_caocao: ["male", "wei", 4, ["new_rejianxiong", "rehujia"], ["zhu"]],
+			re_simayi: ["male", "wei", 3, ["refankui", "reguicai"]],
+			re_guojia: ["male", "wei", 3, ["tiandu", "new_reyiji"]],
+			re_zhangliao: ["male", "wei", 4, ["new_retuxi"]],
+			re_xuzhu: ["male", "wei", 4, ["new_reluoyi"]],
+			re_xiahoudun: ["male", "wei", 4, ["reganglie", "new_qingjian"]],
+			re_zhangfei: ["male", "shu", 4, ["olpaoxiao", "oltishen"]],
+			re_zhaoyun: ["male", "shu", 4, ["ollongdan", "olyajiao"]],
+			re_guanyu: ["male", "shu", 4, ["new_rewusheng", "new_yijue"]],
+			re_machao: ["male", "shu", 4, ["mashu", "retieji"]],
+			re_zhouyu: ["male", "wu", 3, ["reyingzi", "refanjian"]],
+			re_lvmeng: ["male", "wu", 4, ["keji", "qinxue", "rebotu"]],
+			re_ganning: ["male", "wu", 4, ["qixi", "fenwei"]],
+			re_luxun: ["male", "wu", 3, ["reqianxun", "relianying"]],
+			re_daqiao: ["female", "wu", 3, ["reguose", "liuli"]],
+			re_huanggai: ["male", "wu", 4, ["rekurou", "zhaxiang"]],
+			re_lvbu: ["male", "qun", 5, ["wushuang", "new_liyu"]],
+			re_huatuo: ["male", "qun", 3, ["jijiu", "new_reqingnang"]],
+			re_liubei: ["male", "shu", 4, ["rerende", "rejijiang"], ["zhu"]],
+			re_diaochan: ["female", "qun", 3, ["lijian", "rebiyue"]],
+			re_huangyueying: ["female", "shu", 3, ["rejizhi", "reqicai"]],
+			re_sunquan: ["male", "wu", 4, ["rezhiheng", "rejiuyuan"], ["zhu"]],
+			re_sunshangxiang: ["female", "wu", 3, ["xiaoji", "rejieyin"]],
+			re_zhenji: ["female", "wei", 3, ["reluoshen", "qingguo"]],
+			re_zhugeliang: ["male", "shu", 3, ["reguanxing", "kongcheng"]],
+			re_huaxiong: ["male", "qun", 6, ["reyaowu", "shizhan"]],
+
+			re_zhangjiao: ["male", "qun", 3, ["xinleiji", "xinguidao", "xinhuangtian"], ["zhu"]],
+			xin_yuji: ["male", "qun", 3, ["reguhuo"]],
+			re_zuoci: ["male", "qun", 3, ["rehuashen", "rexinsheng"]],
+
+			ol_xiahouyuan: ["male", "wei", 4, ["xinshensu", "shebian"]],
+			caoren: ["male", "wei", 4, ["xinjushou", "xinjiewei"]],
+			ol_weiyan: ["male", "shu", 4, ["xinkuanggu", "reqimou"]],
+			ol_xiaoqiao: ["female", "wu", 3, ["oltianxiang", "olhongyan", "piaoling"]],
+			zhoutai: ["male", "wu", 4, ["buqu", "fenji"]],
+			ol_pangde: ["male", "qun", 4, ["mashu", "rejianchu"]],
+			ol_xuhuang: ["male", "wei", 4, ["olduanliang", "oljiezi"]],
+			ol_sp_zhugeliang: ["male", "shu", 3, ["bazhen", "olhuoji", "olkanpo", "cangzhuo"], []],
+			ol_yanwen: ["male", "qun", 4, ["olshuangxiong"], []],
+			ol_yuanshao: ["male", "qun", 4, ["olluanji", "olxueyi"], ["zhu"]],
+			re_menghuo: ["male", "shu", 4, ["huoshou", "rezaiqi", "twqiushou"], ["zhu"]],
+			ol_dongzhuo: ["male", "qun", 8, ["oljiuchi", "roulin", "benghuai", "olbaonue"], ["zhu"]],
+			ol_sunjian: ["male", "wu", "4/5", ["gzyinghun", "wulie", "twpolu"], ["zhu"]],
+			re_caopi: ["male", "wei", 3, ["rexingshang", "refangzhu", "songwei"], ["zhu"]],
+			ol_jiangwei: ["male", "shu", 4, ["oltiaoxin", "olzhiji"]],
+			ol_caiwenji: ["female", "qun", 3, ["olbeige", "duanchang"]],
+			ol_liushan: ["male", "shu", 3, ["xiangle", "olfangquan", "olruoyu"], ["zhu"]],
+
+			re_sunce: ["male", "wu", 4, ["oljiang", "olhunzi", "olzhiba"], ["zhu"]],
+			re_jianyong: ["male", "shu", 3, ["reqiaoshui", "jyzongshi"]],
+		},
 		characterSort: {
 			refresh: {
 				refresh_standard: [
@@ -155,139 +292,8 @@ game.import("character", function () {
 				],
 			},
 		},
-		connect: true,
-		character: {
-			re_xushu: ["male", "shu", 4, ["zhuhai", "qianxin"]],
-			re_lidian: ["male", "wei", 3, ["xunxun", "xinwangxi"]],
-			re_zhongyao: ["male", "wei", 3, ["rehuomo", "zuoding"], ["clan:颍川钟氏"]],
-			xin_zhangliang: ["male", "qun", 4, ["rejijun", "refangtong"]],
-			re_simalang: ["male", "wei", 3, ["requji", "rejunbing"]],
-			re_zhugedan: ["male", "wei", 4, ["regongao", "rejuyi"]],
-			re_caorui: ["male", "wei", 3, ["huituo", "remingjian", "rexingshuai"], ["zhu"]],
-			re_caochong: ["male", "wei", 3, ["rechengxiang", "renxin"]],
-			ol_zhangzhang: ["male", "wu", 3, ["olzhijian", "olguzheng"]],
-			re_jsp_huangyueying: ["female", "qun", 3, ["rejiqiao", "relinglong"]],
-			re_zhangsong: ["male", "shu", 3, ["qiangzhi", "rexiantu"]],
-			re_zhuzhi: ["male", "wu", 4, ["reanguo"]],
-			dc_caozhi: ["male", "wei", 3, ["reluoying", "dcjiushi"]],
-			ol_huangzhong: ["male", "shu", 4, ["xinliegong", "remoshi"]],
-			re_wenpin: ["male", "wei", 5, ["rezhenwei"]],
-			re_guanzhang: ["male", "shu", 4, ["fuhun", "retongxin"]],
-			re_mazhong: ["male", "shu", 4, ["refuman"]],
-			dc_chenqun: ["male", "wei", 3, ["repindi", "dcfaen"]],
-			re_sundeng: ["male", "wu", 4, ["rekuangbi"]],
-			re_caiyong: ["male", "qun", 3, ["rebizhuan", "retongbo"]],
-			re_chengong: ["male", "qun", 3, ["remingce", "zhichi"]],
-			re_xunyou: ["male", "wei", 3, ["reqice", "rezhiyu"], ["clan:颍川荀氏"]],
-			dc_liru: ["male", "qun", 3, ["xinjuece", "dcmieji", "dcfencheng"]],
-			re_zhuhuan: ["male", "wu", 4, ["refenli", "repingkou"]],
-			ol_dianwei: ["male", "wei", 4, ["olqiangxi", "olninge"]],
-			re_sp_taishici: ["male", "qun", 4, ["rejixu"]],
-			re_liufeng: ["male", "shu", 4, ["rexiansi"]],
-			ol_xunyu: ["male", "wei", 3, ["quhu", "oljieming"], ["clan:颍川荀氏"]],
-			re_liuchen: ["male", "shu", 4, ["rezhanjue", "reqinwang"], ["zhu"]],
-			dc_gongsunzan: ["male", "qun", 4, ["dcyicong", "dcqiaomeng"]],
-			re_duji: ["male", "wei", 3, ["reandong", "reyingshi"]],
-			re_jushou: ["male", "qun", 3, ["dcjianying", "dcshibei"]],
-			re_zhanghe: ["male", "wei", 4, ["reqiaobian"]],
-			dc_xushu: ["male", "shu", 4, ["rezhuhai", "xsqianxin"]],
-			xin_gaoshun: ["male", "qun", 4, ["decadexianzhen", "decadejinjiu"]],
-			re_guohuanghou: ["female", "wei", 3, ["rejiaozhao", "redanxin"]],
-			re_xiahoushi: ["female", "shu", 3, ["reqiaoshi", "reyanyu"]],
-			ol_lusu: ["male", "wu", 3, ["olhaoshi", "oldimeng"]],
-			re_jiaxu: ["male", "qun", 3, ["rewansha", "reluanwu", "reweimu"]],
-			re_guyong: ["male", "wu", 3, ["reshenxing", "rebingyi"]],
-			xin_zhonghui: ["male", "wei", 4, ["xinquanji", "xinzili"], ["clan:颍川钟氏"]],
-			re_caifuren: ["female", "qun", 3, ["reqieting", "rexianzhou"]],
-			re_guanping: ["male", "shu", 4, ["relongyin", "jiezhong"]],
-			re_guotufengji: ["male", "qun", 3, ["rejigong", "shifei"]],
-			re_zhoucang: ["male", "shu", 4, ["rezhongyong"]],
-			ol_zhurong: ["female", "shu", 4, ["juxiang", "lieren", "changbiao"]],
-			re_zhangchunhua: ["female", "wei", 3, ["rejueqing", "reshangshi"]],
-			re_gongsunyuan: ["male", "qun", 4, ["rehuaiyi"]],
-			re_caozhen: ["male", "wei", 4, ["residi"]],
-			re_fuhuanghou: ["female", "qun", 3, ["rezhuikong", "reqiuyuan"]],
-			re_fazheng: ["male", "shu", 3, ["reenyuan", "rexuanhuo"]],
-			xin_lingtong: ["male", "wu", 4, ["decadexuanfeng", "yongjin"]],
-			xin_liubiao: ["male", "qun", 3, ["decadezishou", "decadezongshi"]],
-			re_caoxiu: ["male", "wei", 4, ["qianju", "reqingxi"]],
-			re_sunxiu: ["male", "wu", 3, ["reyanzhu", "rexingxue", "zhaofu"], ["zhu"]],
-			ol_dengai: ["male", "wei", 4, ["oltuntian", "olzaoxian"]],
-			re_gongsunzan: ["male", "qun", 4, ["reqiaomeng", "reyicong"]],
-			re_manchong: ["male", "wei", 3, ["rejunxing", "yuce"]],
-			xin_yufan: ["male", "wu", 3, ["xinzhiyan", "xinzongxuan"]],
-			dc_bulianshi: ["female", "wu", 3, ["dcanxu", "dczhuiyi"]],
-			re_hanhaoshihuan: ["male", "wei", 4, ["reshenduan", "reyonglve"]],
-			re_panzhangmazhong: ["male", "wu", 4, ["reduodao", "reanjian"]],
-			re_wangyi: ["female", "wei", 4, ["zhenlie", "miji"]],
-			re_madai: ["male", "shu", 4, ["mashu", "reqianxi"]],
-			xin_xusheng: ["male", "wu", 4, ["decadepojun"]],
-			re_taishici: ["male", "wu", 4, ["tianyi", "hanzhan"]],
-			re_masu: ["male", "shu", 3, ["resanyao", "rezhiman"]],
-			re_sunluban: ["female", "wu", 3, ["rechanhui", "rejiaojin"]],
-			xin_handang: ["male", "wu", 4, ["xingongji", "xinjiefan"]],
-			yujin_yujin: ["male", "wei", 4, ["decadezhenjun"], ["die_audio:xin_yujin"]],
-			re_caozhang: ["male", "wei", 4, ["xinjiangchi"]],
-			re_chengpu: ["male", "wu", 4, ["ollihuo", "rechunlao"]],
-			re_quancong: ["male", "wu", 4, ["xinyaoming"]],
-			re_liaohua: ["male", "shu", 4, ["xindangxian", "xinfuli"]],
-			re_guohuai: ["male", "wei", 4, ["decadejingce"]],
-			re_wuyi: ["male", "shu", 4, ["xinbenxi"], ["clan:陈留吴氏"]],
-			re_zhuran: ["male", "wu", 4, ["xindanshou"]],
-			ol_pangtong: ["male", "shu", 3, ["ollianhuan", "olniepan"], []],
-			re_zhangyi: ["male", "shu", 5, ["rewurong", "reshizhi"]],
-			xin_wuguotai: ["female", "wu", 3, ["xinganlu", "xinbuyi"]],
-			re_caocao: ["male", "wei", 4, ["new_rejianxiong", "rehujia"], ["zhu"]],
-			re_simayi: ["male", "wei", 3, ["refankui", "reguicai"]],
-			re_guojia: ["male", "wei", 3, ["tiandu", "new_reyiji"]],
-			re_zhangliao: ["male", "wei", 4, ["new_retuxi"]],
-			re_xuzhu: ["male", "wei", 4, ["new_reluoyi"]],
-			re_xiahoudun: ["male", "wei", 4, ["reganglie", "new_qingjian"]],
-			re_zhangfei: ["male", "shu", 4, ["olpaoxiao", "oltishen"]],
-			re_zhaoyun: ["male", "shu", 4, ["ollongdan", "olyajiao"]],
-			re_guanyu: ["male", "shu", 4, ["new_rewusheng", "new_yijue"]],
-			re_machao: ["male", "shu", 4, ["mashu", "retieji"]],
-			re_zhouyu: ["male", "wu", 3, ["reyingzi", "refanjian"]],
-			re_lvmeng: ["male", "wu", 4, ["keji", "qinxue", "rebotu"]],
-			re_ganning: ["male", "wu", 4, ["qixi", "fenwei"]],
-			re_luxun: ["male", "wu", 3, ["reqianxun", "relianying"]],
-			re_daqiao: ["female", "wu", 3, ["reguose", "liuli"]],
-			re_huanggai: ["male", "wu", 4, ["rekurou", "zhaxiang"]],
-			re_lvbu: ["male", "qun", 5, ["wushuang", "new_liyu"]],
-			re_huatuo: ["male", "qun", 3, ["jijiu", "new_reqingnang"]],
-			re_liubei: ["male", "shu", 4, ["rerende", "rejijiang"], ["zhu"]],
-			re_diaochan: ["female", "qun", 3, ["lijian", "rebiyue"]],
-			re_huangyueying: ["female", "shu", 3, ["rejizhi", "reqicai"]],
-			re_sunquan: ["male", "wu", 4, ["rezhiheng", "rejiuyuan"], ["zhu"]],
-			re_sunshangxiang: ["female", "wu", 3, ["xiaoji", "rejieyin"]],
-			re_zhenji: ["female", "wei", 3, ["reluoshen", "reqingguo"]],
-			re_zhugeliang: ["male", "shu", 3, ["reguanxing", "kongcheng"]],
-			re_huaxiong: ["male", "qun", 6, ["reyaowu", "shizhan"]],
-
-			re_zhangjiao: ["male", "qun", 3, ["xinleiji", "xinguidao", "xinhuangtian"], ["zhu"]],
-			xin_yuji: ["male", "qun", 3, ["reguhuo"]],
-			re_zuoci: ["male", "qun", 3, ["rehuashen", "rexinsheng"]],
-
-			ol_xiahouyuan: ["male", "wei", 4, ["xinshensu", "shebian"]],
-			caoren: ["male", "wei", 4, ["xinjushou", "xinjiewei"]],
-			ol_weiyan: ["male", "shu", 4, ["xinkuanggu", "reqimou"]],
-			ol_xiaoqiao: ["female", "wu", 3, ["oltianxiang", "olhongyan", "piaoling"]],
-			zhoutai: ["male", "wu", 4, ["buqu", "fenji"]],
-			ol_pangde: ["male", "qun", 4, ["mashu", "rejianchu"]],
-			ol_xuhuang: ["male", "wei", 4, ["olduanliang", "oljiezi"]],
-			ol_sp_zhugeliang: ["male", "shu", 3, ["bazhen", "olhuoji", "olkanpo", "cangzhuo"], []],
-			ol_yanwen: ["male", "qun", 4, ["olshuangxiong"], []],
-			ol_yuanshao: ["male", "qun", 4, ["olluanji", "olxueyi"], ["zhu"]],
-			re_menghuo: ["male", "shu", 4, ["huoshou", "rezaiqi"]],
-			ol_dongzhuo: ["male", "qun", 8, ["oljiuchi", "roulin", "benghuai", "olbaonue"], ["zhu"]],
-			ol_sunjian: ["male", "wu", "4/5", ["gzyinghun", "wulie"]],
-			re_caopi: ["male", "wei", 3, ["rexingshang", "refangzhu", "songwei"], ["zhu"]],
-			ol_jiangwei: ["male", "shu", 4, ["oltiaoxin", "olzhiji"]],
-			ol_caiwenji: ["female", "qun", 3, ["olbeige", "duanchang"]],
-			ol_liushan: ["male", "shu", 3, ["xiangle", "olfangquan", "olruoyu"], ["zhu"]],
-
-			re_sunce: ["male", "wu", 4, ["oljiang", "olhunzi", "olzhiba"], ["zhu"]],
-			re_jianyong: ["male", "shu", 3, ["reqiaoshui", "jyzongshi"]],
+		characterSubstitute: {
+			
 		},
 		characterIntro: {
 			jsp_huangyueying:
@@ -298,16 +304,21 @@ game.import("character", function () {
 				"字曼成，曹操麾下将领。李典深明大义，不与人争功，崇尚学习与高贵儒雅，尊重博学之士，在军中被称为长者。李典有长者之风，官至破虏将军，三十六岁去世。魏文帝曹丕继位后追谥号为愍侯。",
 			sunben: " ",
 		},
+		characterTitle: {
+			
+		},
 		characterFilter: {
 			re_zuoci: function (mode) {
 				return mode != "guozhan";
 			},
 		},
-		perfectPair: {
-			sunben: ["zhouyu", "taishici", "re_taishici", "daqiao"],
-			re_xushu: ["zhaoyun", "sp_zhugeliang"],
-			re_guohuai: ["xiahouyuan", "zhanghe"],
+		characterInitFilter: {
+			
 		},
+		card: {
+			
+		},
+		/** @type { importCharacterConfig['skill'] } */
 		skill: {
 			ollianhuan: {
 				audio: "xinlianhuan",
@@ -856,6 +867,7 @@ game.import("character", function () {
 								player.getStorage("remingjian_buff").some((i) => i.isIn())
 							);
 						},
+						direct: true,
 						content: function* (event, map) {
 							const player = map.player;
 							const masters = player
@@ -866,12 +878,12 @@ game.import("character", function () {
 							while (masters.length) {
 								const master = masters.shift();
 								if (!master.isIn()) continue;
-								const result = yield player
-									.chooseBool(`是否令${get.translation(master)}发动一次〖恢拓〗？`)
-									.set("choice", get.attitude(player, master) > 0);
-								if (!result.bool) continue;
-								if (!player.isUnderControl(true) && !event.isOnline()) game.delayx();
-								player.logSkill("remingjian_buff", master);
+								// const result = yield player
+									// .chooseBool(`是否令${get.translation(master)}发动一次〖恢拓〗？`)
+									// .set("choice", get.attitude(player, master) > 0);
+								// if (!result.bool) continue;
+								// if (!player.isUnderControl(true) && !event.isOnline()) game.delayx();
+								// player.logSkill("remingjian_buff", master);
 								const next = game.createEvent("huituo");
 								next.setContent(lib.skill.huituo.content);
 								next.player = master;
@@ -3140,7 +3152,7 @@ game.import("character", function () {
 						) {
 							return true;
 						}
-						return Math.random() < 0.5;
+						return Math.random() < (evt.player.countCards("h") / 4);
 					};
 					"step 2";
 					if (result.bool) {
@@ -3263,6 +3275,7 @@ game.import("character", function () {
 			},
 			rexiansi2: {
 				enable: "chooseToUse",
+				sourceSkill: "rexiansi",
 				filter: function (event, player) {
 					return (
 						player.getExpansions("xiansi").length > Math.max(0, player.hp) &&
@@ -3513,6 +3526,7 @@ game.import("character", function () {
 				forced: true,
 				popup: false,
 				charlotte: true,
+				sourceSkill: "rezhanjue",
 				onremove: function (player) {
 					delete player.getStat().skill.rezhanjue_draw;
 				},
@@ -4677,7 +4691,7 @@ game.import("character", function () {
 						},
 					},
 					jieshu: {
-						audio: 2,
+						audio: "reqiaobian",
 						trigger: { player: "phaseJieshuBegin" },
 						forced: true,
 						filter: function (event, player) {
@@ -4803,26 +4817,29 @@ game.import("character", function () {
 				},
 				derivation: "rejianyan",
 			},
+			// 临时修改（by 棘手怀念摧毁）
 			rejianyan: {
 				audio: 2,
 				enable: "phaseUse",
 				usable: 2,
 				filter: function (event, player) {
-					return game.hasPlayer((current) => current.group == "key" || current.hasSex("male"));
+					// return game.hasPlayer((current) => current.group == "key" || current.hasSex("male"));
+					return game.hasPlayer((current) => current.hasSex("male"));
 				},
 				chooseButton: {
 					dialog: function () {
 						return ui.create.dialog("###荐言###" + get.translation("rejianyan_info"));
 					},
 					chooseControl: function (event, player) {
-						var list = [];
-						if (!player.hasSkill("rejianyan_color")) list.addArray(["red", "black"]);
-						if (!player.hasSkill("rejianyan_type")) list.addArray(["basic", "trick", "equip"]);
+						const list = [],
+							storage = player.getStorage("rejianyan_used");
+						if (!storage.includes("color")) list.addArray(["red", "black"]);
+						if (!storage.includes("type")) list.addArray(["basic", "trick", "equip"]);
 						list.push("cancel2");
 						return list;
 					},
 					check: function () {
-						if (!_status.event.player.hasSkill("rejianyan_color")) return "red";
+						if (!_status.event.player.getStorage("rejianyan_used").includes("color")) return "red";
 						return "trick";
 					},
 					backup: function (result, player) {
@@ -4835,13 +4852,14 @@ game.import("character", function () {
 								"step 0";
 								var card = false,
 									info = lib.skill.rejianyan_backup.info;
+								player.addTempSkill("rejianyan_used", "phaseUseEnd");
 								if (info == "red" || info == "black") {
-									player.addTempSkill("rejianyan_color", "phaseUseEnd");
+									player.markAuto("rejianyan_used", "color");
 									card = get.cardPile2(function (card) {
 										return get.color(card) == info;
 									});
 								} else {
-									player.addTempSkill("rejianyan_type", "phaseUseEnd");
+									player.markAuto("rejianyan_used", "type");
 									card = get.cardPile2(function (card) {
 										return get.type(card) == info;
 									});
@@ -4856,7 +4874,8 @@ game.import("character", function () {
 										true,
 										"选择一名角色获得" + get.translation(card),
 										function (card, player, target) {
-											return target.group == "key" || target.hasSex("male");
+											// return target.group == "key" || target.hasSex("male");
+											return target.hasSex("male");
 										}
 									)
 									.set("ai", function (target) {
@@ -4883,7 +4902,8 @@ game.import("character", function () {
 							if (
 								game.hasPlayer(
 									(current) =>
-										(current.group == "key" || current.hasSex("male")) &&
+										// (current.group == "key" || current.hasSex("male")) &&
+										(current.hasSex("male")) &&
 										get.attitude(player, current) > 0
 								)
 							)
@@ -4892,7 +4912,7 @@ game.import("character", function () {
 						},
 					},
 				},
-				subSkill: { type: {}, color: {}, backup: {} },
+				subSkill: { used: { charlotte: true, onremove: true }, backup: {} },
 			},
 			//野兽高顺
 			decadexianzhen: {
@@ -4960,6 +4980,7 @@ game.import("character", function () {
 				audio: "decadexianzhen",
 				charlotte: true,
 				onremove: true,
+				sourceSkill: "decadexianzhen",
 				mod: {
 					targetInRange: function (card, player, target) {
 						if (target == player.storage.decadexianzhen2) return true;
@@ -5464,7 +5485,7 @@ game.import("character", function () {
 							if (!get.tag(card, "damage")) return;
 							if (target.hp + target.hujia < 2 || player.hasSkillTag("jueqing", false, target))
 								return 2;
-							if (target.countMark("redanxin") > 1) return [1, 1];
+							if (!target.hasSkill("rejiaozhao") || target.countMark("redanxin") > 1) return [1, 1];
 							return [1, 0.8 * target.hp - 0.4];
 						},
 					},
@@ -5521,6 +5542,7 @@ game.import("character", function () {
 						player.line(target, "green");
 						target.storage.reqianxi_effect = [event.color, player];
 						target.addTempSkill("reqianxi_effect");
+						target.markSkill("reqianxi_effect");
 					}
 				},
 				subSkill: {
@@ -5659,9 +5681,10 @@ game.import("character", function () {
 						},
 						logTarget: "player",
 						content: function () {
-							var next = trigger.player.phaseDraw();
-							event.next.remove(next);
-							trigger.getParent().next.add(next);
+							const evt = trigger.getParent("phase", true, true);
+							if (evt?.phaseList) {
+								evt.phaseList.splice(evt.num + 1, 0, "phaseDraw|oljiezi");
+							}
 							trigger.player.removeMark("oljiezi", trigger.player.countMark("oljiezi"));
 						},
 					},
@@ -5787,6 +5810,7 @@ game.import("character", function () {
 			reyanyu2: {
 				trigger: { player: "phaseUseEnd" },
 				direct: true,
+				sourceSkill: "reyanyu",
 				filter: (event, player) =>
 					player.hasHistory(
 						"useSkill",
@@ -6142,6 +6166,7 @@ game.import("character", function () {
 				audioname: ["liushan", "re_liubei", "re_liushan", "ol_liushan"],
 				trigger: { player: ["useCardBegin", "respondBegin"] },
 				logTarget: "targets",
+				sourceSkill: "rejijiang",
 				filter: function (event, player) {
 					return event.skill == "rejijiang";
 				},
@@ -6195,6 +6220,7 @@ game.import("character", function () {
 				trigger: { global: ["useCard", "respond"] },
 				usable: 1,
 				direct: true,
+				sourceSkill: "rejijiang",
 				filter: function (event, player) {
 					return (
 						event.card.name == "sha" &&
@@ -6387,6 +6413,7 @@ game.import("character", function () {
 				},
 			},
 			oldimeng: {
+				audio: 2,
 				enable: "phaseUse",
 				usable: 1,
 				filter: function (event, player) {
@@ -6416,11 +6443,8 @@ game.import("character", function () {
 				multiline: true,
 				content: function () {
 					targets[0].swapHandcards(targets[1]);
-					var num = Math.abs(targets[0].countCards("h") - targets[1].countCards("h"));
-					if (num > 0) {
-						player.addMark("oldimeng_discard", num, false);
-						player.addTempSkill("oldimeng_discard", "phaseUseAfter");
-					}
+					player.addTempSkill("oldimeng_discard", "phaseUseAfter");
+					player.markAuto("oldimeng_discard", [targets]);
 				},
 				ai: {
 					threaten: 4.5,
@@ -6442,6 +6466,7 @@ game.import("character", function () {
 				},
 				subSkill: {
 					discard: {
+						audio: "oldimeng",
 						trigger: { player: "phaseUseEnd" },
 						forced: true,
 						charlotte: true,
@@ -6449,8 +6474,12 @@ game.import("character", function () {
 						filter: function (event, player) {
 							return player.countCards("he") > 0;
 						},
-						content: function () {
-							player.chooseToDiscard("he", true, player.countMark("oldimeng_discard"));
+						async content(event, trigger, player) {
+							for (let targets of player.getStorage("oldimeng_discard")) {
+								if (targets.length < 2) continue;
+								const num = Math.abs(targets[0].countCards("h") - targets[1].countCards("h"));
+								if (num > 0 && player.countCards("he") > 0) await player.chooseToDiscard("he", true, num);
+							}
 						},
 					},
 				},
@@ -6458,8 +6487,11 @@ game.import("character", function () {
 			//贾诩
 			rewansha: {
 				audio: "wansha",
-				audioname: ["re_jiaxu", "boss_lvbu3", "new_simayi"],
-				audioname2: { shen_simayi: "jilue_wansha", xin_simayi: "jilue_wansha" },
+				// 临时修改（by 棘手怀念摧毁）
+				// audioname: ["re_jiaxu", "boss_lvbu3", "new_simayi"],
+				// audioname2: { shen_simayi: "jilue_wansha" },
+				audioname: ["re_jiaxu", "boss_lvbu3"],
+				audioname2: { shen_simayi: "jilue_wansha", new_simayi: "wansha_new_simayi", xin_simayi: "wansha_new_simayi" },
 				global: "rewansha_global",
 				trigger: { global: "dyingBegin" },
 				forced: true,
@@ -6628,6 +6660,22 @@ game.import("character", function () {
 						target: function (card, player, target) {
 							if (target == _status.currentPhase && get.tag(card, "damage")) return [0, 2, 0, 0];
 						},
+					},
+				},
+				group: "reweimu_log",
+				subSkill: {
+					log: {
+						audio: "reweimu",
+						trigger: { global: "useCard1" },
+						forced: true,
+						firstDo: true,
+						filter(event, player) {
+							if (event.player == player) return false;
+							if (get.color(event.card) != "black" || get.type(event.card) != "trick") return false;
+							var info = lib.card[event.card.name];
+							return info && info.selectTarget && info.selectTarget == -1 && !info.toself;
+						},
+						content() {},
 					},
 				},
 			},
@@ -6848,10 +6896,8 @@ game.import("character", function () {
 				audio: 2,
 				enable: "phaseUse",
 				filter: function (event, player) {
-					return (
-						player.getExpansions("xinquanji").length > 0 &&
-						(!player.hasSkill("xinpaiyi_0") || !player.hasSkill("xinpaiyi_1"))
-					);
+					if (player.getStorage("xinpaiyi_used").length > 1) return false;
+					return player.getExpansions("xinquanji").length > 0;
 				},
 				chooseButton: {
 					check: function (button) {
@@ -6889,8 +6935,7 @@ game.import("character", function () {
 					},
 					select: 2,
 					filter: function (button, player) {
-						if (typeof button.link == "number" && player.hasSkill("xinpaiyi_" + button.link))
-							return false;
+						if (typeof button.link == "number" && player.getStorage("xinpaiyi_used").includes(button.link)) return false;
 						if (ui.selected.buttons.length)
 							return typeof ui.selected.buttons[0].link != typeof button.link;
 						return true;
@@ -6915,8 +6960,10 @@ game.import("character", function () {
 					combo: "xinquanji",
 				},
 				subSkill: {
-					0: {},
-					1: {},
+					used: {
+						charlotte: true,
+						onremove: true,
+					},
 					backup0: {
 						audio: "xinpaiyi",
 						filterCard: () => false,
@@ -6925,7 +6972,8 @@ game.import("character", function () {
 						delay: false,
 						content: function () {
 							"step 0";
-							player.addTempSkill("xinpaiyi_0", "phaseUseEnd");
+							player.addTempSkill("xinpaiyi_used", "phaseUseEnd");
+							player.markAuto("xinpaiyi_used", [0]);
 							var card = lib.skill.xinpaiyi_backup.card;
 							player.loseToDiscardpile(card);
 							"step 1";
@@ -6958,7 +7006,8 @@ game.import("character", function () {
 						content: function () {
 							"step 0";
 							targets.sortBySeat();
-							player.addTempSkill("xinpaiyi_1", "phaseUseEnd");
+							player.addTempSkill("xinpaiyi_used", "phaseUseEnd");
+							player.markAuto("xinpaiyi_used", [1]);
 							var card = lib.skill.xinpaiyi_backup.card;
 							player.loseToDiscardpile(card);
 							"step 1";
@@ -7294,15 +7343,17 @@ game.import("character", function () {
 							.chooseControl("摸牌阶段", "出牌阶段")
 							.set("prompt", "精策：选择要执行的额外阶段");
 					"step 1";
-					if (event.goon || result.index == 0) {
-						var next = player.phaseDraw();
-						event.next.remove(next);
-						trigger.getParent().next.push(next);
-					}
+					//插入阶段，后来的先插
+					const evt = trigger.getParent("phase", true, true);
 					if (event.goon || result.index == 1) {
-						var next = player.phaseUse();
-						event.next.remove(next);
-						trigger.getParent().next.push(next);
+						if (evt?.phaseList) {
+							evt.phaseList.splice(evt.num + 1, 0, `phaseUse|${event.name}`);
+						}
+					}
+					if (event.goon || result.index == 0) {
+						if (evt?.phaseList) {
+							evt.phaseList.splice(evt.num + 1, 0, `phaseDraw|${event.name}`);
+						}
 					}
 				},
 			},
@@ -7475,9 +7526,10 @@ game.import("character", function () {
 						return num;
 					},
 				},
-				trigger: { player: "phaseDiscardBegin" },
+				trigger: { player: "phaseDiscardEnd" },
 				forced: true,
 				charlotte: true,
+				sourceSkill: "rejigong",
 				filter: function (event, player) {
 					if (player.isHealthy()) return false;
 					var num = 0;
@@ -7755,6 +7807,7 @@ game.import("character", function () {
 			},
 			ollihuo2: {
 				trigger: { player: "useCard2" },
+				sourceSkill: "ollihuo",
 				filter: function (event, player) {
 					if (event.card.name != "sha" || !game.hasNature(event.card, "fire")) return false;
 					return game.hasPlayer(function (current) {
@@ -7800,6 +7853,7 @@ game.import("character", function () {
 			},
 			ollihuo3: {
 				trigger: { player: "useCardEnd" },
+				sourceSkill: "ollihuo",
 				filter: function (event, player) {
 					return (
 						event.lihuo_changed == true &&
@@ -7811,6 +7865,7 @@ game.import("character", function () {
 				forced: true,
 				audio: "lihuo",
 				audioname: ["re_chengpu"],
+				sourceSkill: "ollihuo",
 				content: function () {
 					player.loseHp();
 				},
@@ -8032,18 +8087,13 @@ game.import("character", function () {
 				frequent: true,
 				preHidden: true,
 				filter: function (event, player, name) {
-					//if(name=='damageEnd') return true;
-					//if(!event.card) return false;
-					if (
-						player.hasHistory("useSkill", function (evt) {
-							return evt.skill == "gzquanji" && evt.event.triggername == name;
-						})
-					)
-						return false;
+					if (player.getStorage("gzquanji_used").includes(name)) return false;
 					return true;
 				},
 				content: function () {
 					"step 0";
+					player.addTempSkill("gzquanji_used");
+					player.markAuto("gzquanji_used", event.triggername);
 					player.draw();
 					"step 1";
 					var hs = player.getCards("he");
@@ -8073,6 +8123,12 @@ game.import("character", function () {
 				},
 				ai: {
 					notemp: true
+				},
+				subSkill: {
+					used: {
+						onremove: true,
+						charlotte: true,
+					},
 				},
 			},
 			gzpaiyi: {
@@ -8331,6 +8387,7 @@ game.import("character", function () {
 				trigger: { player: "phaseEnd" },
 				forced: true,
 				popup: false,
+				sourceSkill: "xinjiefan",
 				content: function () {
 					player.restoreSkill("xinjiefan");
 				},
@@ -8382,6 +8439,7 @@ game.import("character", function () {
 			residi_push: {
 				trigger: { global: "phaseUseBegin" },
 				direct: true,
+				sourceSkill: "residi",
 				filter: function (event, player) {
 					return event.player != player && player.getExpansions("residi").length > 0;
 				},
@@ -8459,6 +8517,7 @@ game.import("character", function () {
 				audio: "residi",
 				trigger: { global: "phaseUseEnd" },
 				forced: true,
+				sourceSkill: "residi",
 				filter: function (event, player) {
 					if (!event.residi || !event.residi.includes(player)) return false;
 					var sha = player.canUse("sha", event.player, false),
@@ -8574,6 +8633,7 @@ game.import("character", function () {
 			rehuaiyi2: {},
 			rezhuikong: {
 				audio: 2,
+				audioname2: { tw_fuhuanghou: "xinzhuikong" },
 				trigger: { global: "phaseZhunbeiBegin" },
 				check: function (event, player) {
 					if (get.attitude(player, event.player) < -2) {
@@ -8741,6 +8801,7 @@ game.import("character", function () {
 			reenyuan1: {
 				audio: "reenyuan",
 				trigger: { player: "gainEnd" },
+				sourceSkill: "reenyuan",
 				filter: function (event, player) {
 					if (
 						!event.source ||
@@ -8765,6 +8826,7 @@ game.import("character", function () {
 				audio: "reenyuan",
 				trigger: { player: "damageEnd" },
 				logTarget: "source",
+				sourceSkill: "reenyuan",
 				filter: function (event, player) {
 					return event.source && event.source != player && event.source.isIn();
 				},
@@ -9027,6 +9089,7 @@ game.import("character", function () {
 			decadezishou_zhiheng: {
 				trigger: { player: "phaseJieshuBegin" },
 				direct: true,
+				sourceSkill: "decadezishou",
 				filter: function (event, player) {
 					return (
 						player.countCards("h") > 0 &&
@@ -9506,7 +9569,9 @@ game.import("character", function () {
 					},
 					reverseEquip: true,
 					noe: true,
-					expose: 0.2,
+					threaten(player, target) {
+						return target.countCards("e") + target.countCards("h") / 3;
+					}
 				},
 			},
 			oltuntian: {
@@ -9758,6 +9823,7 @@ game.import("character", function () {
 			},
 			decadelihuo2: {
 				trigger: { player: "useCard2" },
+				sourceSkill: "decadelihuo",
 				filter: function (event, player) {
 					if (event.card.name != "sha" || !game.hasNature(event.card, "fire")) return false;
 					return game.hasPlayer(function (current) {
@@ -9798,6 +9864,7 @@ game.import("character", function () {
 			},
 			decadelihuo3: {
 				trigger: { player: "useCardAfter" },
+				sourceSkill: "decadelihuo",
 				filter: function (event, player) {
 					return (
 						event.card.name == "sha" &&
@@ -9844,6 +9911,7 @@ game.import("character", function () {
 				trigger: { player: "damageBegin2" },
 				silent: true,
 				lastDo: true,
+				sourceSkill: "decadechunlao",
 				filter: function (event, player) {
 					return !player.isLinked();
 				},
@@ -9857,6 +9925,7 @@ game.import("character", function () {
 					player: "damageEnd",
 				},
 				prompt: "是否发动【醇醪】将武将牌重置？",
+				sourceSkill: "decadechunlao",
 				filter: function (event, player) {
 					return player.isLinked() && event.num > 1 && !event.decadechunlaox;
 				},
@@ -10134,6 +10203,7 @@ game.import("character", function () {
 					//player:'phaseJieshuBegin',
 				},
 				forced: true,
+				sourceSkill: "rezishou",
 				filter: function (event, player) {
 					if (event.name == "damage") return event.player != player;
 					if (player.getHistory("skipped").includes("phaseUse")) return false;
@@ -10300,6 +10370,7 @@ game.import("character", function () {
 				forced: true,
 				popup: false,
 				charlotte: true,
+				sourceSkill: "decadepojun",
 				filter: function (event, player) {
 					return player.getExpansions("decadepojun2").length > 0;
 				},
@@ -10373,6 +10444,7 @@ game.import("character", function () {
 					global: "chooseToCompareAfter",
 				},
 				audio: "hanzhan",
+				sourceSkill: "hanzhan",
 				filter: function (event, player) {
 					if (event.preserve) return false;
 					if (
@@ -10468,7 +10540,7 @@ game.import("character", function () {
 						.set("ai", function (button) {
 							if (!_status.event.att) return 0;
 							if (get.position(button.link) == "e") {
-								if (get.subtype(button.link) == "equip2") return 2 * get.value(button.link);
+								if (get.subtype(button.link) == "equip2") return 5 * get.value(button.link);
 								return get.value(button.link);
 							}
 							return 1;
@@ -10563,6 +10635,7 @@ game.import("character", function () {
 				intro: { name2: "烈", content: "mark" },
 				trigger: { player: "damageBegin3" },
 				forced: true,
+				sourceSkill: "wulie",
 				content: function () {
 					trigger.cancel();
 					player.removeMark("wulie2", 1);
@@ -10927,7 +11000,8 @@ game.import("character", function () {
 						game.addVideo("judge2", null, event.videoId);
 						ui.arena.classList.remove("thrownhighlight");
 					}
-					let cards = [event.card].filterInD("od");
+					"step 2"
+					let cards = [event.card].filterInD();
 					if(cards.length) game.cardsGotoPile(cards, "insert");
 				},
 				ai: {
@@ -10960,6 +11034,7 @@ game.import("character", function () {
 				audio: "paoxiao",
 				audioname: ["re_zhangfei", "xiahouba", "re_guanzhang"],
 				audioname2: { guanzhang: "paoxiao_guanzhang" },
+				sourceSkill: "olpaoxiao",
 				filter: function (event, player) {
 					return event.card && event.card.name == "sha" && player.countMark("olpaoxiao2") > 0;
 				},
@@ -11291,6 +11366,7 @@ game.import("character", function () {
 			},
 			rechunlao2: {
 				enable: "chooseToUse",
+				sourceSkill: "rechunlao",
 				filter: function (event, player) {
 					return (
 						event.type == "dying" &&
@@ -11484,6 +11560,7 @@ game.import("character", function () {
 				},
 				audio: "rejiushi",
 				audioname2: { mb_caomao: "rejiushi_mb_caomao", mb_caomao_shadow: "rejiushi_mb_caomao", mb_caomao_dead: "rejiushi_mb_caomao" },
+				sourceSkill: "rejiushi",
 				enable: "chooseToUse",
 				filter: function (event, player) {
 					if (player.classList.contains("turnedover")) return false;
@@ -11567,6 +11644,7 @@ game.import("character", function () {
 				trigger: { player: "damageBegin3" },
 				silent: true,
 				firstDo: true,
+				sourceSkill: "rejiushi",
 				filter: function (event, player) {
 					return player.classList.contains("turnedover");
 				},
@@ -11577,6 +11655,7 @@ game.import("character", function () {
 			rejiushi3: {
 				audio: "rejiushi",
 				trigger: { player: "damageEnd" },
+				sourceSkill: "rejiushi",
 				check: function (event, player) {
 					return player.isTurnedOver();
 				},
@@ -11759,6 +11838,10 @@ game.import("character", function () {
 					player
 						.chooseControl("bazhen", "olhuoji", "olkanpo")
 						.set("prompt", "选择获得一个技能").ai = function () {
+						let player = get.event("player"), threaten = get.threaten(player);
+						if (!player.hasEmptySlot(2)) return "olhuoji";
+						if (threaten < 0.8) return "olkanpo";
+						if (threaten < 1.6) return "bazhen";
 						return ["olhuoji", "bazhen"].randomGet();
 					};
 					"step 6";
@@ -12145,6 +12228,7 @@ game.import("character", function () {
 				audio: "rejinjiu",
 				forced: true,
 				trigger: { player: "damageBegin3" },
+				sourceSkill: "rejinjiu",
 				filter: function (event, player) {
 					return event.getParent(2).jiu == true;
 				},
@@ -12167,6 +12251,7 @@ game.import("character", function () {
 						event.card.name == "sha" && event.target.hp > 0 && event.target.countCards("he") > 0
 					);
 				},
+				preHidden: true,
 				content: function () {
 					"step 0";
 					var next = player.choosePlayerCard(
@@ -12183,6 +12268,7 @@ game.import("character", function () {
 					});
 					next.set("goon", get.attitude(player, trigger.target) <= 0);
 					next.set("forceAuto", true);
+					next.setHiddenSkill(event.name);
 					"step 1";
 					if (result.bool) {
 						var target = trigger.target;
@@ -12207,6 +12293,7 @@ game.import("character", function () {
 			repojun3: {
 				audio: "repojun",
 				trigger: { source: "damageBegin1" },
+				sourceSkill: "repojun",
 				filter: function (event, player) {
 					var target = event.player;
 					return (
@@ -12219,6 +12306,10 @@ game.import("character", function () {
 				forced: true,
 				locked: false,
 				logTarget: "player",
+				preHidden: true,
+				check(event, player) {
+					return get.attitude(player, event.player) < 0;
+				},
 				content: function () {
 					trigger.num++;
 				},
@@ -12228,6 +12319,7 @@ game.import("character", function () {
 				forced: true,
 				popup: false,
 				charlotte: true,
+				sourceSkill: "repojun",
 				filter: function (event, player) {
 					return player.getExpansions("repojun2").length > 0;
 				},
@@ -12358,6 +12450,7 @@ game.import("character", function () {
 				popup: false,
 				audio: false,
 				onremove: true,
+				sourceSkill: "olfangquan",
 				content: function () {
 					"step 0";
 					event.count = player.countMark(event.name);
@@ -12365,7 +12458,7 @@ game.import("character", function () {
 					"step 1";
 					event.count--;
 					player
-						.chooseToDiscard("是否弃置一张牌并令一名其他角色进行一个额外回合？")
+						.chooseToDiscard("是否弃置一张手牌并令一名其他角色进行一个额外回合？")
 						.set("logSkill", "olfangquan").ai = function (card) {
 						return 20 - get.value(card);
 					};
@@ -12398,6 +12491,7 @@ game.import("character", function () {
 				forced: true,
 				popup: false,
 				audio: false,
+				sourceSkill: "olfangquan",
 				content: function () {
 					player.unmarkSkill("olfangquan");
 					player.removeSkill("olfangquan3");
@@ -12416,6 +12510,7 @@ game.import("character", function () {
 			olluanji_remove: {
 				trigger: { player: "useCard2" },
 				direct: true,
+				sourceSkill: "olluanji",
 				filter: function (event, player) {
 					return event.card.name == "wanjian" && event.targets.length > 0;
 				},
@@ -12474,6 +12569,7 @@ game.import("character", function () {
 				audio: "olxueyi",
 				trigger: { player: "phaseUseBegin" },
 				prompt2: "弃置一枚「裔」标记，然后摸一张牌",
+				sourceSkill: "olxueyi",
 				check: function (event, player) {
 					return player.getUseValue("wanjian") > 0 || !player.needsToDiscard();
 				},
@@ -13377,6 +13473,7 @@ game.import("character", function () {
 				popup: false,
 				charlotte: true,
 				firstDo: true,
+				sourceSkill: "reguhuo",
 				filter: function (event, player) {
 					return event.skill && event.skill.indexOf("reguhuo_") == 0;
 				},
@@ -13688,6 +13785,7 @@ game.import("character", function () {
 				trigger: { player: "judgeEnd" },
 				direct: true,
 				disableReason: ["暴虐", "助祭", "弘仪", "孤影"],
+				sourceSkill: "xinleiji",
 				filter: function (event, player) {
 					return (
 						!lib.skill.xinleiji_misa.disableReason.includes(event.judgestr) &&
@@ -13703,11 +13801,28 @@ game.import("character", function () {
 						player.logSkill("xinleiji");
 						player.recover();
 					}
-					player.chooseTarget("雷击：是否对一名角色造成" + event.num + "点雷电伤害？").ai =
-						function (target) {
-							var player = _status.event.player;
-							return get.damageEffect(target, player, player, "thunder");
-						};
+					player
+						.chooseTarget("雷击：是否对一名角色造成" + event.num + "点雷电伤害？")
+						.set("ai", target => {
+							const player = _status.event.player;
+							let eff = get.damageEffect(target, player, target, "thunder");
+							if (
+								get.event("num") > 1 &&
+								!target.hasSkillTag("filterDamage", null, {
+									player: player,
+									card: null,
+									nature: "thunder",
+								})
+							) {
+								if (eff > 0) {
+									eff -= 25;
+								} else if (eff < 0) {
+									eff *= 2;
+								}
+							}
+							return eff * get.attitude(player, target);
+						})
+						.set("num", event.num);
 					"step 1";
 					if (result.bool && result.targets && result.targets.length) {
 						if (!event.logged) player.logSkill("xinleiji", result.targets);
@@ -13771,6 +13886,9 @@ game.import("character", function () {
 							var judging = _status.event.judging;
 							var result = trigger.judge(card) - trigger.judge(judging);
 							var attitude = get.attitude(player, trigger.player);
+							let val = get.value(card);
+							if (get.subtype(card) == "equip2") val /= 2;
+							else val /= 7;
 							if (attitude == 0 || result == 0) {
 								if (trigger.player != player) return 0;
 								if (
@@ -13786,10 +13904,9 @@ game.import("character", function () {
 								return 0;
 							}
 							if (attitude > 0) {
-								return result;
-							} else {
-								return -result;
+								return result - val;
 							}
+							return -result - val;
 						})
 						.set("judging", trigger.player.judging[0]);
 					"step 1";
@@ -13997,6 +14114,7 @@ game.import("character", function () {
 					re_yanwen: "shuangxiong_re_yanwen1",
 				},
 				trigger: { player: "phaseDrawBegin1" },
+				sourceSkill: "reshuangxiong",
 				check: function (event, player) {
 					if (player.countCards("h") > player.hp) return true;
 					if (player.countCards("h") > 3) return true;
@@ -14072,6 +14190,7 @@ game.import("character", function () {
 					player: "damageEnd",
 				},
 				direct: true,
+				sourceSkill: "reshuangxiong",
 				filter: function (event, player) {
 					var evt = event.getParent();
 					return (
@@ -14419,8 +14538,8 @@ game.import("character", function () {
 				ai: {
 					maixie: true,
 					maixie_hp: true,
-					result: {
-						effect: function (card, player, target) {
+					effect: {
+						target: function (card, player, target) {
 							if (get.tag(card, "damage")) {
 								if (player.hasSkillTag("jueqing", false, target)) return [1, -2];
 								if (!target.hasFriend()) return;
@@ -14429,7 +14548,7 @@ game.import("character", function () {
 									if (player.needsToDiscard()) num = 0.7;
 									else num = 0.5;
 								}
-								if (player.hp >= 4) return [1, num * 2];
+								if (target.hp >= 4) return [1, num * 2];
 								if (target.hp == 3) return [1, num * 1.5];
 								if (target.hp == 2) return [1, num * 0.5];
 							}
@@ -14664,6 +14783,7 @@ game.import("character", function () {
 				popup: false,
 				forced: true,
 				charlotte: true,
+				sourceSkill: "new_yijue",
 				content: function () {
 					trigger.num++;
 				},
@@ -14773,6 +14893,7 @@ game.import("character", function () {
 				},
 				forced: true,
 				charlotte: true,
+				sourceSkill: "new_tishen",
 				content: function () {
 					player.gain(trigger.cards.filterInD("od"), "gain2");
 				},
@@ -15266,7 +15387,9 @@ game.import("character", function () {
 			},
 			rezhiheng: {
 				audio: 2,
-				audioname2: { shen_caopi: "rezhiheng_shen_caopi", xin_simayi: "jilue_zhiheng" },
+				// 临时修改（by 棘手怀念摧毁）
+				// audioname2: { shen_caopi: "rezhiheng_shen_caopi", new_simayi: "rezhiheng_new_simayi" },
+				audioname2: { shen_caopi: "rezhiheng_shen_caopi", xin_simayi: "rezhiheng_new_simayi" },
 				mod: {
 					aiOrder: function (player, card, num) {
 						if (num <= 0 || get.itemtype(card) !== "card" || get.type(card) !== "equip")
@@ -15362,6 +15485,7 @@ game.import("character", function () {
 					threaten: 1.55,
 				},
 			},
+			rezhiheng_new_simayi: { audio: 1 },
 			reqicai: {
 				mod: {
 					targetInRange: function (card, player, target, now) {
@@ -15369,14 +15493,17 @@ game.import("character", function () {
 						if (type == "trick" || type == "delay") return true;
 					},
 					canBeDiscarded: function (card) {
-						if (get.position(card) == "e" && ["equip2", "equip5"].includes(get.subtype(card)))
+						if (get.position(card) == "e" && get.subtypes(card).some(slot => slot == "equip2" || slot == "equip5")) {
 							return false;
+						}
 					},
 				},
 			},
 			rejizhi: {
 				audio: 2,
-				audioname2: { lukang: "rejizhi_lukang", xin_simayi: "jilue_jizhi" },
+				// 临时修改（by 棘手怀念摧毁）
+				// audioname2: { lukang: "rejizhi_lukang", new_simayi: "rejizhi_new_simayi" },
+				audioname2: { lukang: "rejizhi_lukang", xin_simayi: "rejizhi_new_simayi" },
 				locked: false,
 				trigger: { player: "useCard" },
 				frequent: true,
@@ -15436,16 +15563,14 @@ game.import("character", function () {
 					},
 				},
 			},
+			rejizhi_new_simayi: { audio: 1 },
 			rebiyue: {
 				audio: 2,
+				audioname2: { sp_diaochan: "biyue" },
 				trigger: { player: "phaseJieshuBegin" },
 				frequent: true,
 				content: function () {
-					var num = 1;
-					if (!player.countCards("h")) {
-						num = 2;
-					}
-					player.draw(num);
+					player.draw(player.countCards("h") ? 1 : 2);
 				},
 			},
 			rerende: {
@@ -15675,6 +15800,7 @@ game.import("character", function () {
 			rerende1: {
 				trigger: { player: "phaseUseBegin" },
 				silent: true,
+				sourceSkill: "rerende",
 				content: function () {
 					player.storage.rerende = 0;
 					player.storage.rerende2 = [];
@@ -15785,7 +15911,6 @@ game.import("character", function () {
 			},
 			reguicai: {
 				audio: 2,
-				audioname2: { xin_simayi: "jilue_guicai" },
 				audioname: ["new_simayi"],
 				trigger: { global: "judge" },
 				direct: true,
@@ -15819,12 +15944,14 @@ game.import("character", function () {
 							var judging = _status.event.judging;
 							var result = trigger.judge(card) - trigger.judge(judging);
 							var attitude = get.attitude(player, trigger.player);
+							let val = get.value(card);
+							if (get.subtype(card) == "equip2") val /= 2;
+							else val /= 4;
 							if (attitude == 0 || result == 0) return 0;
 							if (attitude > 0) {
-								return result - get.value(card) / 2;
-							} else {
-								return -result - get.value(card) / 2;
+								return result - val;
 							}
+							return -result - val;
 						})
 						.set("judging", trigger.player.judging[0]);
 					"step 1";
@@ -15938,6 +16065,7 @@ game.import("character", function () {
 			},
 			reluoyi2: {
 				trigger: { source: "damageBegin1" },
+				sourceSkill: "reluoyi",
 				filter: function (event) {
 					return (
 						event.card &&
@@ -15946,6 +16074,7 @@ game.import("character", function () {
 					);
 				},
 				forced: true,
+				charlotte: true,
 				content: function () {
 					trigger.num++;
 				},
@@ -15978,12 +16107,20 @@ game.import("character", function () {
 						return 0;
 					});
 					"step 2";
-					if (result.color == "black") {
-						if (trigger.source.countCards("he")) {
-							player.discardPlayerCard(trigger.source, "he", true);
-						}
-					} else if (trigger.source.isIn()) {
-						trigger.source.damage();
+					switch (result.color) {
+						case "black":
+							if (trigger.source.countCards("he")) {
+								player.discardPlayerCard(trigger.source, "he", true);
+							}
+							break;
+
+						case "red":
+							if (trigger.source.isIn()) {
+								trigger.source.damage();
+							}
+							break;
+						default:
+							break;
 					}
 					event.num--;
 					if (event.num > 0 && player.hasSkill("reganglie")) {
@@ -16213,6 +16350,7 @@ game.import("character", function () {
 				trigger: { global: "phaseEnd" },
 				forced: true,
 				audio: false,
+				sourceSkill: "reqianxun",
 				content: function () {
 					var cards = player.getExpansions("reqianxun2");
 					if (cards.length) player.gain(cards, "draw");
@@ -16322,6 +16460,7 @@ game.import("character", function () {
 				trigger: { player: "phaseJieshuBegin" },
 				priority: -10,
 				silent: true,
+				sourceSkill: "retishen",
 				content: function () {
 					player.storage.retishen2 = player.hp;
 					game.broadcast(function (player) {
@@ -16578,8 +16717,8 @@ game.import("character", function () {
 				ai: {
 					maixie: true,
 					maixie_hp: true,
-					result: {
-						effect: function (card, player, target) {
+					effect: {
+						target: function (card, player, target) {
 							if (get.tag(card, "damage")) {
 								if (player.hasSkillTag("jueqing", false, target)) return [1, -2];
 								if (!target.hasFriend()) return;
@@ -16588,7 +16727,7 @@ game.import("character", function () {
 									if (player.needsToDiscard()) num = 0.7;
 									else num = 0.5;
 								}
-								if (player.hp >= 4) return [1, num * 2];
+								if (target.hp >= 4) return [1, num * 2];
 								if (target.hp == 3) return [1, num * 1.5];
 								if (target.hp == 2) return [1, num * 0.5];
 							}
@@ -16603,6 +16742,7 @@ game.import("character", function () {
 				mark: true,
 				popup: "遗计拿牌",
 				audio: false,
+				sourceSkill: "reyiji",
 				content: function () {
 					player.$draw(player.storage.reyiji2.length);
 					player.gain(player.storage.reyiji2, "fromStorage");
@@ -16923,6 +17063,7 @@ game.import("character", function () {
 				audio: "zhaxiang",
 				audioname2: { ol_sb_jiangwei: "zhaxiang_ol_sb_jiangwei" },
 				trigger: { player: "useCard" },
+				sourceSkill: "zhaxiang",
 				filter: function (event, player) {
 					return event.card && event.card.name == "sha" && get.color(event.card) == "red";
 				},
@@ -17965,8 +18106,7 @@ game.import("character", function () {
 			rezhiheng_info:
 				"出牌阶段限一次，你可以弃置任意张牌并摸等量的牌，若你在发动〖制衡〗时弃置了所有手牌，则你多摸一张牌。",
 			rejiuyuan: "救援",
-			rejiuyuan_info:
-				"主公技，其他吴势力角色对自己使用【桃】时，若其体力值大于你，则其可以选择令你回复1点体力，然后其摸一张牌。",
+			rejiuyuan_info: "主公技，其他吴势力角色于其回合内回复体力时，若其体力值大于等于你，则该角色可以改为令你回复1点体力，然后其摸一张牌。",
 
 			new_yajiao: "涯角",
 			new_yajiao_info:
@@ -18529,8 +18669,7 @@ game.import("character", function () {
 			olhaoshi_info:
 				"摸牌阶段开始时，你可以多摸两张牌。然后摸牌阶段结束时，若你的手牌数大于5，则你将手牌数的一半（向下取整）交给一名手牌最少其他角色并获得如下效果直到你下回合开始：当你成为【杀】或普通锦囊牌的目标后，其可以交给你一张手牌。",
 			oldimeng: "缔盟",
-			oldimeng_info:
-				"出牌阶段限一次，你可令两名满足X≤Y的其他角色交换手牌并获得如下效果：出牌阶段结束时，你弃置X张牌（X为这两名角色手牌数之差的绝对值；Y为你的牌数）。",
+			oldimeng_info: "出牌阶段限一次，你可令两名手牌数之差不大于你牌数的其他角色交换手牌。若如此做，此阶段结束时，你弃置X张牌（X为这两名角色手牌数之差）。",
 
 			rejijiang: "激将",
 			rejijiang1: "激将",
@@ -18606,7 +18745,7 @@ game.import("character", function () {
 			xsqianxin_info: "觉醒技。当你造成伤害后，若你已受伤，则你减1点体力上限并获得〖荐言〗。",
 			rejianyan: "荐言",
 			rejianyan_info:
-				"出牌阶段每项各限一次。你可选择一种颜色或一种牌的类别，然后系统从牌堆中检索出一张满足该条件的牌并展示之。然后你将此牌交给一名男性角色或Key势力角色。",
+				"出牌阶段每项各限一次。你可选择一种颜色或一种牌的类别，然后系统从牌堆中检索出一张满足该条件的牌并展示之。然后你将此牌交给一名男性角色。",
 			re_zhanghe: "界张郃",
 			re_zhanghe_prefix: "界",
 			reqiaobian: "巧变",
@@ -18801,8 +18940,7 @@ game.import("character", function () {
 			re_caorui: "界曹叡",
 			re_caorui_prefix: "界",
 			remingjian: "明鉴",
-			remingjian_info:
-				"出牌阶段限一次。你可以将所有手牌交给一名其他角色，然后该角色于其下个回合获得如下效果：1.手牌上限与使用【杀】的次数上限+1；2.当该角色首次造成伤害后，其可以令你发动一次〖恢拓〗。",
+			remingjian_info: "出牌阶段限一次。你可以将所有手牌交给一名其他角色，然后该角色于其下个回合获得如下效果：1.手牌上限与使用【杀】的次数上限+1；2.当该角色首次造成伤害后，你发动一次〖恢拓〗。",
 			rexingshuai: "兴衰",
 			rexingshuai_info:
 				"主公技，限定技。当你进入濒死状态时，你可令其他魏势力角色依次选择是否令你回复1点体力。然后这些角色依次受到1点伤害。有〖明鉴〗效果的角色于其回合内杀死角色后，你重置〖兴衰〗。",
@@ -18862,6 +19000,15 @@ game.import("character", function () {
 			refresh_yijiang5: "界限突破·将5",
 			refresh_yijiang6: "界限突破·原6",
 			refresh_xinghuo: "界限突破·星火",
+		},
+		perfectPair: {
+			
+		},
+		characterReplace: {
+			
+		},
+		pinyins: {
+			
 		},
 	};
 });

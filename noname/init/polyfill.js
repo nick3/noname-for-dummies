@@ -4,6 +4,28 @@ import { game } from "../game/index.js";
 import { _status } from "../status/index.js";
 import { ui } from "../ui/index.js";
 
+/**
+ * 为元素添加右击或长按弹出的提示信息
+ * @param {string} title 标题
+ * @param {string} content 提示的具体内容
+ * @returns {HTMLElement}
+ */
+HTMLElement.prototype.setNodeIntro = function (title, content) {
+	this.classList.add("nodeintro");
+	// @ts-expect-error ThereBe
+	this.nodeTitle = title;
+	// @ts-expect-error ThereBe
+	this.nodeContent = content;
+	if (!lib.config.touchscreen) {
+		if (lib.config.hover_all) {
+			lib.setHover(this, ui.click.hoverplayer);
+		}
+		if (lib.config.right_info) {
+			this.oncontextmenu = ui.click.rightplayer;
+		}
+	}
+	return this;
+};
 // 废弃覆盖原型的HTMLDivElement.prototype.animate
 // 改为HTMLDivElement.prototype.addTempClass
 /**
@@ -165,6 +187,10 @@ Reflect.defineProperty(HTMLDivElement.prototype, "setBackground", {
 					nameinfo = get.character(name);
 				}
 			}
+			
+			// character[4]添加character:xxx标签的武将皮肤按原名来（而不是跟随xxx的皮肤）
+			let name1 = name;
+			
 			let imgPrefixUrl;
 			if (!modeimage && nameinfo && nameinfo[4]) {
 				for (const value of nameinfo[4]) {
@@ -192,6 +218,8 @@ Reflect.defineProperty(HTMLDivElement.prototype, "setBackground", {
 				this.setBackgroundDB(dbimage.slice(3));
 				return this;
 			} else if (modeimage) src = `image/mode/${modeimage}/character/${name}${ext}`;
+			else if (type == "character" && lib.config.skin[name1] && arguments[2] != "noskin")
+				src = `image/skin/${name1}/${lib.config.skin[name1]}${ext}`;
 			else if (type == "character" && lib.config.skin[name] && arguments[2] != "noskin")
 				src = `image/skin/${name}/${lib.config.skin[name]}${ext}`;
 			else if (type == "character") {

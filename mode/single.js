@@ -271,7 +271,7 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 
 			xiahouyuan: ["male", "wei", 4, ["shensu", "suzi"]],
 			old_caoren: ["male", "wei", 4, ["jushou"]],
-			huangzhong: ["male", "shu", 4, ["liegong"]],
+			huangzhong: ["male", "shu", 4, ["sgliegong"]],
 			weiyan: ["male", "shu", 4, ["sgkuanggu"]],
 			xiaoqiao: ["female", "wu", 3, ["tianxiang", "hongyan"]],
 			old_zhoutai: ["male", "wu", 4, ["gzbuqu"]],
@@ -629,6 +629,53 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						zhu: _status.characterlist.randomRemove(6),
 						fan: _status.characterlist.randomRemove(6),
 					};
+					
+					// 创建自由选将功能
+					const createCharacterDialog = function () {
+						if (get.config("free_choose")) {
+							event.dialogxx = ui.create.characterDialog("heightset");
+						} else {
+							event.dialogxx = ui.create.characterDialog("heightset");
+						}
+					};
+					if (lib.onfree) {
+						lib.onfree.push(createCharacterDialog);
+					} else {
+						createCharacterDialog();
+					}
+					ui.create.cheat2 = function () {
+						ui.cheat2 = ui.create.control("自由选将", function () {
+							if (this.dialog == _status.event.dialog) {
+								if (game.changeCoin) {
+									game.changeCoin(10);
+								}
+								this.dialog.close();
+								_status.event.dialog = this.backup;
+								this.backup.open();
+								delete this.backup;
+								game.uncheck();
+								game.check();
+							} else {
+								if (game.changeCoin) {
+									game.changeCoin(-10);
+								}
+								this.backup = _status.event.dialog;
+								_status.event.dialog.close();
+								_status.event.dialog = _status.event.parent.dialogxx;
+								this.dialog = _status.event.dialog;
+								this.dialog.open();
+								game.uncheck();
+								game.check();
+							}
+						});
+						if (lib.onfree) {
+							ui.cheat2.classList.add("disabled");
+						}
+					};
+					if (!ui.cheat2 && get.config("free_choose")) {
+						ui.create.cheat2();
+					}
+					
 					const dialog = ["请选择出场武将", '<div class="text center">本局游戏Buff</div>'];
 					game.globalBuff.forEach((buff, ind) => {
 						dialog.add(
@@ -640,7 +687,17 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					dialog.add([_status.characterChoice[game.me.identity], "character"]);
 					game.me.chooseButton(true, dialog);
 					"step 2";
+					// 创建自由选将功能
+					if (ui.cheat2) {
+						ui.cheat2.close();
+						delete ui.cheat2;
+					}
+					
 					game.me.init(result.links[0]);
+					
+					// 创建自由选将功能
+					game.addRecentCharacter(result.links[0]);
+					
 					_status.characterChoice[game.me.identity].removeArray(result.links);
 					var list = _status.characterChoice[game.me.enemy.identity].randomRemove(1);
 					game.me.enemy.init(list[0]);
@@ -1082,6 +1139,53 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						zhu: _status.characterlist.randomRemove(6),
 						fan: _status.characterlist.randomRemove(6),
 					};
+					
+					// 创建自由选将功能
+					const createCharacterDialog = function () {
+						if (get.config("free_choose")) {
+							event.dialogxx = ui.create.characterDialog("heightset");
+						} else {
+							event.dialogxx = ui.create.characterDialog("heightset");
+						}
+					};
+					if (lib.onfree) {
+						lib.onfree.push(createCharacterDialog);
+					} else {
+						createCharacterDialog();
+					}
+					ui.create.cheat2 = function () {
+						ui.cheat2 = ui.create.control("自由选将", function () {
+							if (this.dialog == _status.event.dialog) {
+								if (game.changeCoin) {
+									game.changeCoin(10);
+								}
+								this.dialog.close();
+								_status.event.dialog = this.backup;
+								this.backup.open();
+								delete this.backup;
+								game.uncheck();
+								game.check();
+							} else {
+								if (game.changeCoin) {
+									game.changeCoin(-10);
+								}
+								this.backup = _status.event.dialog;
+								_status.event.dialog.close();
+								_status.event.dialog = _status.event.parent.dialogxx;
+								this.dialog = _status.event.dialog;
+								this.dialog.open();
+								game.uncheck();
+								game.check();
+							}
+						});
+						if (lib.onfree) {
+							ui.cheat2.classList.add("disabled");
+						}
+					};
+					if (!ui.cheat2 && get.config("free_choose")) {
+						ui.create.cheat2();
+					}
+					
 					const list = ["zhu", "fan"].map((identity) => {
 						const dialog = ["请选择出场武将", '<div class="text center">本局游戏Buff</div>'];
 						game.globalBuff.forEach((buff, ind) => {
@@ -1097,6 +1201,12 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 					game.me.chooseButtonOL(list, function (player, result) {
 						if (game.online || player == game.me) {
 							player.init(result.links[0]);
+							
+							// 创建自由选将功能
+							if (player == game.me) {
+								game.addRecentCharacter(result.links[0]);
+							}
+							
 							player.hp = 10;
 							player.maxHp = 10;
 							player.hujia = 0;
@@ -1104,6 +1214,12 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						}
 					});
 					"step 2";
+					// 创建自由选将功能
+					if (ui.cheat2) {
+						ui.cheat2.close();
+						delete ui.cheat2;
+					}
+					
 					for (var i in result) {
 						var current = lib.playerOL[i];
 						if (result[i] == "ai") {
@@ -1630,6 +1746,29 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 						get.prompt("huwei"),
 						"视为使用一张【水淹七军】"
 					).logSkill = "huwei";
+				},
+			},
+			sgliegong: {
+				audio: "liegong",
+				audioname: ["re_huangzhong"],
+				trigger: { player: "useCardToPlayered" },
+				filter(event, player) {
+					if (event.card.name != "sha" || !player.enemy) return false;
+					return player.enemy.countCards("h") >= player.hp;
+				},
+				check(event, player) {
+					return get.attitude(player, event.target) <= 0;
+				},
+				logTarget: "target",
+				async content(event, trigger, player) {
+					trigger.getParent().directHit.push(trigger.target);
+				},
+				ai: {
+					directHit_ai: true,
+					skillTagFilter(player, tag, arg) {
+						if (get.attitude(player, arg.target) > 0 || arg.card.name != "sha") return false;
+						return player.enemy && player.enemy.countCards("h") >= player.hp;
+					},
 				},
 			},
 			sgkuanggu: {
@@ -2252,6 +2391,8 @@ game.import("mode", function (lib, game, ui, get, ai, _status) {
 				"限定技，出牌阶段，你可以和对手拼点。若你赢/没赢，你/其视为对其/你使用一张【决斗】。",
 			huwei: "虎威",
 			huwei_info: "当你登场时，你可以视为使用一张【水淹七军】。",
+			sgliegong: "烈弓",
+			sgliegong_info: "当你使用【杀】指定目标后，若对手的手牌数大于等于你的体力值，你可令此【杀】不可被【闪】响应。",
 			sgkuanggu: "狂骨",
 			sgkuanggu_info: "当你造成伤害后，若你已受伤，你可以进行判定：若结果为黑色，你回复1点体力。",
 			suzi: "肃资",

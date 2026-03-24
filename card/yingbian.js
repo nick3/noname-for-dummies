@@ -364,6 +364,21 @@ game.import("card", function () {
 			},
 		},
 		skill: {
+			baipidao_skill: {
+				audio: true,
+				equipSkill: true,
+				trigger: {
+					source: "damageSource",
+				},
+				filter(event, player) {
+					return event.card?.name == "sha" && event.notLink() && event.player?.isIn() && event.player.countGainableCards(player, "h");
+				},
+				prompt2: "获得其一张手牌",
+				logTarget: "player",
+				async content(event, trigger, player) {
+					await player.gainPlayerCard(trigger.player, "h", true);
+				},
+			},
 			suijiyingbian_skill: {
 				mod: {
 					cardname: function (card, player) {
@@ -845,6 +860,9 @@ game.import("card", function () {
 				"出牌阶段开始时，你可以横置或重置一名角色。出牌阶段结束时，你可以重铸一张手牌。",
 			taigongyinfu_skill: "太公阴符",
 			taigongyinfu_link: "太公阴符",
+			baipidao: "百辟刀",
+			baipidao_skill: "百辟刀",
+			baipidao_info: "当你使用【杀】对目标角色造成伤害后，可以获得其一张手牌。",
 			yingbian_zhuzhan_tag: "助战",
 			yingbian_kongchao_tag: "空巢",
 			yingbian_fujia_tag: "富甲",

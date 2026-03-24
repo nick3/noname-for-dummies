@@ -293,7 +293,7 @@
 
 .player>.camp-wrap>.avatar-name,
 #arena>.player.xplayer>.name{/*将名*/
-    top: 30px;
+    top: 28px;
     left: 30.8px; 
     calc(var(--border-width) / 2);
     transform: translateX(-50%);
@@ -426,7 +426,7 @@
 	/* justify-content: center; */
 	left: 51.6% !important;
 	right: auto;
-	top: 21px;
+	top: 19px;
 	width: 18px;
 	height: 96px;
 	font-size: 14.7px;
@@ -478,7 +478,7 @@
 /* 挑战模式界面修复 */
 .player.bossplayer>.hp-wrap {
 	left: -78.5px;
-	bottom: -3px;
+	bottom: -5px;
 }
 
 .player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).hp-wrap {
@@ -525,6 +525,12 @@
 	transform: none !important;
 }
 
+/* 炉石模式行动值 */
+.player .actcount.hp {
+	left: 23px;
+	top: 17px;
+}
+
 /* 乱斗模式界面修复 */
 .player>.avatar,
 .player>.avatar2 {
@@ -566,12 +572,18 @@
 	border-radius: 8px;
 }
 
-/* 适配战棋/塔防/炉石模式 */
+/* 适配战棋/塔防模式 */
 .player.minskin>.avatar {
-	left: 4px !important;
-	top: 4px !important;
-	width: 112px !important;
-	height: 112px !important;
+	left: 3px !important;
+	top: 3px !important;
+	width: 114px !important;
+	height: 114px !important;
+}
+
+/* 适配炉石模式 */
+#arena.stone > .player.fullskin.stone_deck.shown > .avatar {
+	width: 98% !important;
+	left: 1% !important;
 }
 
 .player.fullskin.fullskin2>.avatar,
@@ -777,7 +789,7 @@
     left: -13px;
     top: auto;
     right: 0;
-    bottom: -1px;
+    /* bottom: -1px; */
     width: 100%;
     margin: 0;
     text-align: center;
@@ -1184,6 +1196,14 @@
 	display: none !important;
 }
 
+/* 炉石模式卡组标记 */
+.player>.menubutton.round.identity {
+	width: 20px !important;
+	height: 20px !important;
+	top: 0.1px !important;
+	right: -0.3px !important;
+}
+
 .player>.identity,
 #arena>.player:not(.minskin)>.identity {
     left: auto;
@@ -1501,11 +1521,113 @@
 }
 @media screen and (min-height: 800px) {
 	.dialog.bosscharacter {
-		height: 317px !important;
+		height: 300px !important;
 		bottom: calc(50% - 235px) !important;
 	}
 	
 	#bosslist {
 		top: 5px !important;
 	}
+}
+
+/* 国战围攻队列标记美化 */
+/*国战围*/
+.guozhanwei{
+	display: block;
+	position: absolute;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_wei.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+/*国战魏队*/
+.guozhanweidui{
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_weidui.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+/*国战蜀队*/
+.guozhanshudui{
+	display: block;
+	position: absolute;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_shudui.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+/*国战吴队*/
+.guozhanwudui{
+	display: block;
+	position: absolute;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_wudui.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+/*国战群队*/
+.guozhanqundui{
+	display: block;
+	position: absolute;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_qundui.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+/*国战晋队*/
+.guozhanjindui{
+	display: block;
+	position: absolute;
+	background-color: none;
+	background-repeat: no-repeat;
+	background-image: url('assets/image/game_gz_jindui.png');
+	background-size: 100% 100%;
+	width:30px;
+	height:30px;
+	left: 118px;
+	bottom: 152px;
+	z-index:150 !important;
+}
+
+/* 护甲 */
+.hujia {
+	position: relative !important;
+	margin-bottom: 1px;
+	left: -0.6px;
+	width: 14px !important;
+	height: 14px !important;
+	line-height: 14px !important;
+	font-size: 14px;
+	font-family: "shousha";
+	color: white;
+	text-align: center !important;
+	text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0, 0 0 8px black;
+	background: url("../../theme/style/hp/image/shield.png") !important;
+	background-size: 100% 100% !important;
+	z-index: 3;
 }

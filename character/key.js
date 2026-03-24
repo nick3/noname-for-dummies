@@ -1642,6 +1642,7 @@ game.import("character", function () {
 				discard: false,
 				lose: false,
 				delay: false,
+				locked: true,
 				promptfunc: () =>
 					"出牌阶段，你可以赠予一张“米券”，然后执行一项本回合内未被选择过的效果：⒈对其造成1点伤害；⒉摸两张牌；⒊弃置其的两张牌；⒋亮出牌堆顶的一张牌，然后你可以使用之。",
 				check: (card) => {
@@ -3123,6 +3124,7 @@ game.import("character", function () {
 						.set("ai", (serafu) => get.attitude(_status.event.player, serafu))
 						.forResult();
 				},
+				groupSkill: "key",
 				content() {
 					targets.sortBySeat();
 					game.asyncDraw(targets);
@@ -3192,6 +3194,7 @@ game.import("character", function () {
 						}
 					}
 				},
+				groupSkill: "shu",
 				async content(event, trigger, player) {
 					const result = event.cost_data;
 					if (result.type === "addSkill") {
@@ -3368,6 +3371,7 @@ game.import("character", function () {
 					player: "enterGame",
 				},
 				forced: true,
+				locked: false,
 				dutySkill: true,
 				derivation: "mia_fengfa",
 				filter(event, player) {
@@ -4957,6 +4961,7 @@ game.import("character", function () {
 			},
 			misuzu_zhongyuan: {
 				trigger: { player: "judge" },
+				limited: true,
 				skillAnimation: true,
 				animationColor: "key",
 				logTarget: "player",
@@ -5189,7 +5194,8 @@ game.import("character", function () {
 					),
 				filterCard: (card, player) => get.type(card) == "equip" && player.canRecast(card),
 				check(card) {
-					if (!_status.event.player.hasEquipableSlot(get.subtype(card))) return 5;
+					if (get.position(card) == "e") return 0.5 - get.value(card, get.player());
+					if (!get.player().hasEquipableSlot(get.subtype(card))) return 5;
 					return 3 - get.value(card);
 				},
 				content() {
@@ -8589,6 +8595,7 @@ game.import("character", function () {
 				},
 			},
 			kyoko_zhengyi: {
+				locked: true,
 				group: ["kyoko_jingce", "kyoko_shelie", "kyoko_zhiheng"],
 				count(player) {
 					var list = [];
@@ -9603,13 +9610,20 @@ game.import("character", function () {
 				async content(event, trigger, player) {
 					const target = event.indexedData;
 					const { result } = await target.judge();
-					if (result.color === "red" && target.isIn()) {
-						await target.draw();
-					} else {
-						const source = _status.currentPhase;
-						if (source && source.isIn() && source.countCards("h") > 0) {
-							source.chooseToDiscard("he", true);
-						}
+					switch (result.color) {
+						case "red":
+							await target.draw();
+							break;
+
+						case "black":
+							const source = _status.currentPhase;
+							if (source && source.isIn() && source.countCards("h") > 0) {
+								source.chooseToDiscard("he", true);
+							}
+							break;
+
+						default:
+							break;
 					}
 				},
 				ai: { expose: 0.2 },
@@ -10882,8 +10896,8 @@ game.import("character", function () {
 			saya_powei: {
 				audio: 2,
 				trigger: { player: "phaseAfter" },
-				locked: true,
 				limited: true,
+				locked: false,
 				unique: true,
 				skillAnimation: true,
 				animationColor: "metal",
@@ -12718,7 +12732,7 @@ game.import("character", function () {
 			key_iwasawa: "岩泽雅美",
 			key_kengo: "宫泽谦吾",
 			key_yoshino: "吉野晴彦",
-			key_yui: "由依",
+			key_yui: "芳冈由依",
 			key_tsumugi: "紬文德斯",
 			key_saya: "朱鹭户沙耶",
 			key_harukakanata: "三枝叶留佳&二木佳奈多",
@@ -12923,8 +12937,7 @@ game.import("character", function () {
 			rin_baoqiu_info:
 				"锁定技，你的攻击范围+2。当你使用【杀】指定目标后，你进行判定。若结果：为红色，此【杀】对其的伤害值基数+1；为黑色，其无法闪避此【杀】；为♠/♥，此【杀】不计入使用次数限制且你摸一张牌；为♦/♣，目标角色的所有非锁定技失效直到回合结束，且你弃置其一张牌。",
 			sasami_miaobian: "喵变",
-			sasami_miaobian_info:
-				"当你的体力值变为：3以下时，你获得技能〖公清〗，2以下时，你获得技能〖复难〗，1以下时，你获得技能〖暴球〗。",
+			sasami_miaobian_info: "锁定技，当你的体力值变为：3以下时，你获得技能〖公清〗，2以下时，你获得技能〖复难〗，1以下时，你获得技能〖暴球〗。",
 			sasami_gongqing: "公清",
 			sasami_gongqing_info:
 				"锁定技。当你受到伤害时，若伤害来源的攻击范围：<3，则你令此伤害的数值减为1。>3，你令此伤害+1。",
@@ -13225,7 +13238,7 @@ game.import("character", function () {
 				"你可以如手牌般使用或打出“影”。锁定技，当你使用“影”时，强制触发对应的应变效果。",
 			kotomi_qinji: "琴击",
 			kotomi_qinji_info:
-				"出牌阶段开始时，你可视为使用使用【万箭齐发】。你以此法使用【万箭齐发】造成的伤害视为失去体力。",
+				"出牌阶段开始时，你可视为使用【万箭齐发】。你以此法使用【万箭齐发】造成的伤害视为失去体力。",
 			kotomi_chuanxiang: "传箱",
 			kotomi_chuanxiang2: "传箱",
 			kotomi_chuanxiang_info:
@@ -13442,6 +13455,7 @@ game.import("character", function () {
 		},
 		pinyins: {
 			加藤うみ: ["Kato", "Umi"],
+			鹰原羽未: ["Takahara", "Umi"],
 			仲村由理: ["Nakamura", "Yuri"],
 			此花露西娅: ["Konohana", "Lucia"],
 			枣恭介: ["Natsume", "Kyousuke"],
@@ -13454,7 +13468,7 @@ game.import("character", function () {
 			岩泽雅美: ["Iwasawa", "Masami"],
 			宫泽谦吾: ["Miyazawa", "Kengo"],
 			吉野晴彦: ["Yoshino", "Haruhiko"],
-			由依: ["Yui"],
+			芳冈由依: ["Yoshioka", "Yui"],
 			紬文德斯: ["Tsumugi", "Wenders"],
 			朱鹭户沙耶: ["Tokido", "Saya"],
 			"三枝叶留佳&二木佳奈多": ["Saigusa", "Haruka", "Futaki", "Kanata"],

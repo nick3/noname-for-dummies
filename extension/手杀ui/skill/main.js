@@ -18,16 +18,22 @@ app.import(function(lib, game, ui, get, ai, _status, app) {
       Object.assign(ui.create, {
         skills: function(skills) {
           ui.skills = plugin.createSkills(skills, ui.skills);
+          // 修复塔防模式不布防/招募直接点两次完成进游戏后会报错的bug
+          if(ui.skillControl)
           ui.skillControl.update();
           return ui.skills;
         },
         skills2: function(skills) {
           ui.skills2 = plugin.createSkills(skills, ui.skills2);
+          // 修复塔防模式不布防/招募直接点两次完成进游戏后会报错的bug
+          if(ui.skillControl)
           ui.skillControl.update();
           return ui.skills2;
         },
         skills3: function(skills) {
           ui.skills3 = plugin.createSkills(skills, ui.skills3);
+          // 修复塔防模式不布防/招募直接点两次完成进游戏后会报错的bug
+          if(ui.skillControl)
           ui.skillControl.update();
           return ui.skills3;
         },

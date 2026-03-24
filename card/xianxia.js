@@ -25,6 +25,7 @@ game.import("card", function () {
 					delete player.storage.tiejili_skill;
 					player.unmarkSkill("tiejili_skill");
 				},
+				destroy: true,
 				onEquip() {
 					if (!card.storage.tiejili_skill) card.storage.tiejili_skill = 2;
 					player.storage.tiejili_skill = card.storage.tiejili_skill;
@@ -34,6 +35,7 @@ game.import("card", function () {
 				audio: true,
 				fullskin: true,
 				type: "trick",
+				cardnature: "fire",
 				derivation: "ty_luxun",
 				cardimage: "huoshaolianying",
 				enable: true,
@@ -48,9 +50,9 @@ game.import("card", function () {
 					else {
 						result = await player
 							.choosePlayerCard(target, true, "he")
-							.set("ai", function (card) {
+							.set("ai", function (button) {
 								if (_status.event.getRand() < 0.5) return Math.random();
-								return get.value(card);
+								return get.value(button.link);
 							})
 							.forResult();
 					}
@@ -270,6 +272,7 @@ game.import("card", function () {
 			},
 			ty_feilongduofeng: {
 				fullskin: true,
+				cardimage: "feilongduofeng",
 				type: "equip",
 				subtype: "equip1",
 				distance: { attackFrom: -1 },
@@ -554,7 +557,8 @@ game.import("card", function () {
 		},
 		translate: {
 			tiejili: "铁蒺藜骨朵",
-			tiejili_info: "准备阶段，你可以将此牌的攻击范围改为x，直到回合结束或此牌离开你的装备区（x为你的体力值）。",
+			//线下只有一把，线上要做销毁防止污染牌堆
+			tiejili_info: "准备阶段，你可以将此牌的攻击范围改为x，直到回合结束或此牌离开你的装备区（x为你的体力值）。当此牌离开你的装备区后，销毁之。",
 			tiejili_skill: "铁蒺藜骨朵",
 			tiejili_skill_info: "准备阶段，你可以将此牌的攻击范围改为x，直到回合结束或此牌离开你的装备区（x为你的体力值）。",
 			lx_huoshaolianying: "火烧连营",
